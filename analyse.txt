@@ -16,4 +16,4 @@ Je choisirais le tri fusion, parce qu’il est rapide et stable. Le tri rapide m
 
 5. Avez-vous observé des différences significatives entre O(n²) et O(n log n) sur vos données réelles ?
 
-Oui, c’est flagrant ! Les tris O(n²) (sélection, insertion) prennent beaucoup plus de temps et font énormément de comparaisons. Les tris fusion et rapide (O(n log n)) sont beaucoup plus efficaces, surtout quand il y a beaucoup de biens à trier. 
+Oui Les tris O(n²) (sélection, insertion) prennent beaucoup plus de temps et font énormément de comparaisons. Les tris fusion et rapide (O(n log n)) sont beaucoup plus efficaces, surtout quand il y a beaucoup de biens à trier. 

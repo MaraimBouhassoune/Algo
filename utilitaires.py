@@ -16,7 +16,7 @@ def lire_csv_biens(chemin_fichier, nb_elements=None):
                 break
             valeurs = ligne.strip().split(',')
             if len(valeurs) != len(en_tete):
-                continue  # Ignore les lignes corrompues
+                continue  
             bien = {col: val for col, val in zip(en_tete, valeurs)}
             biens.append(bien)
     return biens 
