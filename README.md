@@ -1,35 +1,94 @@
-# Projet : Analyse de performance d'algorithmes (Tri et Recherche)
+# Projet : Analyse de Performance d'Algorithmes
+## Tri et Recherche - Mesure et Comparaison
 
-## Objectif
-Ce projet a pour but de comparer les performances de plusieurs algorithmes de tri et de recherche sur des données réelles d'immobilier. On mesure le temps d'exécution, le nombre de comparaisons et d'opérations pour chaque algorithme, puis on analyse les résultats.
+### 📋 Description du projet
+Ce projet implémente et compare les performances de 7 algorithmes sur des données réelles d'immobilier :
+- **4 algorithmes de tri** : sélection, insertion, fusion, rapide
+- **3 algorithmes de recherche** : linéaire, binaire, min/max
 
-## Structure du projet
-
+### 🏗️ Structure du projet
 ```
-├── main.py                  # Programme principal qui lance tous les tests
-├── algorithmes_tri.py       # Les 4 algorithmes de tri (sélection, insertion, fusion, rapide)
-├── algorithmes_recherche.py # Les 3 algorithmes de recherche 
-├── utilitaires.py           # Fonctions pour lire le CSV et autres utilitaires
-├── transactions_immobilieres.csv # Données fournies (ne pas modifier)
-├── resultats.txt            # Résultats des tests (généré automatiquement)
-├── analyse.txt              # Réponses aux questions d'analyse
+Algo/
+├── main.py                          # Programme principal (tris + recherches)
+├── algorithmes_tri.py               # 4 algorithmes de tri
+├── algorithmes_recherche.py         # 3 algorithmes de recherche
+├── utilitaires.py                   # Lecture du CSV sans bibliothèque
+├── test_recherche.py                # Tests isolés des recherches
+├── transactions_immobilieres.csv    # Données d'immobilier
+├── resultats.txt                    # Résultats des tests
+├── analyse.txt                      # Analyse des résultats
+└── README.md                        # Documentation
 ```
 
-## Comment exécuter le projet
-1. Placez le fichier `transactions_immobilieres.csv` dans le dossier du projet.
-2. Lancez le programme principal :
-   ```bash
-   python main.py
-   ```
-3. Les résultats des tris s'affichent à l'écran et sont enregistrés dans `resultats.txt`.
-4. Lisez `analyse.txt` pour voir les réponses aux questions d'analyse.
+### 🚀 Comment lancer le projet
 
-## Ce que fait chaque fichier
-- **main.py** : lance les tests de tri et de recherche, affiche et sauvegarde les résultats.
-- **algorithmes_tri.py** : contient les fonctions de tri, chacune compte les comparaisons, échanges/décalages, temps.
-- **algorithmes_recherche.py** : contiendra les fonctions de recherche (linéaire, binaire, min/max).
-- **utilitaires.py** : lit le CSV sans bibliothèque externe, retourne les données sous forme de liste de dictionnaires.
-- **resultats.txt** : tous les résultats des tests, au format demandé.
-- **analyse.txt** : réponses aux questions d'analyse.
+#### Option 1 : Tests complets (recommandé)
+```bash
+python main.py
+```
+Lance tous les tests :
+- **Tris** : 4 algorithmes × 2 critères × 3 tailles = 24 tests
+- **Recherches** : 4 types × 2 tailles = 8 tests
 
----
+#### Option 2 : Tests de recherche uniquement
+```bash
+python test_recherche.py
+```
+Lance les tests de recherche sur un mini-tableau fictif (10 biens).
+
+### 📊 Résultats obtenus
+
+#### Algorithmes de Tri
+- **Tri Fusion** : Le plus rapide (O(n log n))
+- **Tri Rapide** : Très efficace mais moins stable
+- **Tri Insertion** : Moyennement efficace (O(n²))
+- **Tri Sélection** : Le plus lent (O(n²))
+
+#### Algorithmes de Recherche
+- **Recherche Binaire** : Très rapide (O(log n)) - 5-7 comparaisons sur 500-1000 éléments
+- **Recherche Linéaire** : Linéaire (O(n)) - 500-999 comparaisons
+- **Recherche Min/Max** : Efficace en un seul parcours
+
+### 🔍 Tests de recherche effectués
+
+#### Sur 500 éléments :
+- Maisons à Paris : 10 trouvées
+- Prix exact 350000€ : Position 295 (recherche binaire)
+- Prix au m² : Min 985€/m², Max 12777€/m²
+- Appartements 3 pièces : 60 trouvés
+
+#### Sur 1000 éléments :
+- Maisons à Paris : 17 trouvées
+- Prix exact 350000€ : Position 600 (recherche binaire)
+- Prix au m² : Min 985€/m², Max 13785€/m²
+- Appartements 3 pièces : 91 trouvés
+
+### 📈 Observations importantes
+
+1. **Complexité algorithmique** : Les différences entre O(n²) et O(n log n) sont spectaculaires sur de gros volumes
+2. **Recherche binaire** : 100x plus rapide que la recherche linéaire
+3. **Stabilité** : Le tri fusion est plus stable que le tri rapide
+4. **Données réelles** : Les performances varient selon la distribution des données
+
+### 🛠️ Technologies utilisées
+- **Python** (sans bibliothèques externes)
+- **Lecture CSV** manuelle (sans pandas/csv)
+- **Mesure de temps** avec `time.time()`
+- **Comptage manuel** des opérations
+
+### 📝 Analyse complète
+Consultez `analyse.txt` pour les réponses détaillées aux 10 questions d'analyse du projet.
+
+### 👥 Répartition du travail
+- **Personne 1** : Lecture CSV, algorithmes de tri, tests de tri, analyse tris (Q1-5)
+- **Personne 2** : Algorithmes de recherche, tests de recherche, analyse recherches (Q6-10)
+
+### ✅ Validation
+Le projet respecte toutes les contraintes :
+- ✅ Implémentation FROM SCRATCH
+- ✅ Pas de bibliothèques externes (csv, pandas, numpy)
+- ✅ Comptage manuel des opérations
+- ✅ Tests sur 3 tailles (100, 500, 1000)
+- ✅ Format d'affichage respecté
+- ✅ Sauvegarde dans resultats.txt
+- ✅ Analyse complète dans analyse.txt

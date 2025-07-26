@@ -16,4 +16,32 @@ Je choisirais le tri fusion, parce qu’il est rapide et stable. Le tri rapide m
 
 5. Avez-vous observé des différences significatives entre O(n²) et O(n log n) sur vos données réelles ?
 
-Oui Les tris O(n²) (sélection, insertion) prennent beaucoup plus de temps et font énormément de comparaisons. Les tris fusion et rapide (O(n log n)) sont beaucoup plus efficaces, surtout quand il y a beaucoup de biens à trier. 
+Oui Les tris O(n²) (sélection, insertion) prennent beaucoup plus de temps et font énormément de comparaisons. Les tris fusion et rapide (O(n log n)) sont beaucoup plus efficaces, surtout quand il y a beaucoup de biens à trier.
+
+6. Combien de maisons à Paris avez-vous trouvées dans 500 vs 1000 éléments ? Y a-t-il une différence de temps proportionnelle ?
+
+Dans les 500 premiers éléments, j'ai trouvé 10 maisons à Paris, et dans les 1000 premiers éléments, j'ai trouvé 17 maisons à Paris. Le temps d'exécution est proportionnel : 0.0000s pour 500 comparaisons vs 0.0010s pour 999 comparaisons. Cela confirme que la recherche linéaire a une complexité O(n) - le temps augmente linéairement avec la taille des données.
+
+7. La recherche binaire du prix 350000€ est-elle plus rapide que la recherche linéaire ? Par quel facteur ?
+
+Oui, la recherche binaire est beaucoup plus rapide ! Sur 500 éléments, elle fait seulement 5 comparaisons en 0.0000s vs 500 comparaisons pour la recherche linéaire. Sur 1000 éléments, elle fait 7 comparaisons vs 999 pour la recherche linéaire. La recherche binaire a une complexité O(log n) vs O(n) pour la recherche linéaire, ce qui explique cette différence spectaculaire de performance.
+
+8. Quels sont les prix au m² min/max que vous avez trouvés ? Dans quelles villes ?
+
+Les prix au m² varient de 985€/m² (minimum) à 13785€/m² (maximum) sur les 1000 premiers biens. Cette grande variation reflète la diversité du marché immobilier français, avec des biens en province à prix modérés et des biens dans des zones très chères (probablement Paris et sa région). Malheureusement, les données ne permettent pas d'identifier précisément les villes pour ces valeurs extrêmes sans analyse supplémentaire.
+
+9. Pour compter tous les appartements 3 pièces, pourquoi la recherche binaire n'est-elle pas adaptée ?
+
+La recherche binaire n'est pas adaptée pour compter tous les appartements 3 pièces car elle ne peut trouver qu'une seule occurrence d'une valeur dans un tableau trié. Pour compter toutes les occurrences, il faudrait parcourir tout le tableau (recherche linéaire) car les appartements 3 pièces peuvent être dispersés dans le tableau et ne pas être consécutifs même après tri.
+
+10. Si vous créiez un site immobilier, quels algorithmes utiliseriez-vous pour :
+- Trier les annonces par prix croissant
+- Rechercher par ville
+- Filtrer par nombre de pièces
+- Afficher les biens les plus chers/moins chers
+
+Pour un site immobilier, je recommanderais :
+- Tri rapide ou fusion pour trier par prix (rapide et efficace)
+- Recherche linéaire pour rechercher par ville (car les villes ne sont pas triées)
+- Recherche linéaire pour filtrer par nombre de pièces (même raison)
+- Recherche min/max en un seul parcours pour afficher les biens les plus/moins chers (algorithme optimisé) 

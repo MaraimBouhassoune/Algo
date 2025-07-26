@@ -1,36 +1,48 @@
+=== RÉSULTATS COMPLETS : TRIS ET RECHERCHES ===
+
 
 === TRI PAR PRIX (100 éléments) ===
-Tri SÉLECTION par PRIX : 0.0020s | 4950 comparaisons | 95 échanges
-Tri INSERTION par PRIX : 0.0022s | 2495 comparaisons | 2493 décalages
+Tri SÉLECTION par PRIX : 0.0010s | 4950 comparaisons | 95 échanges
+Tri INSERTION par PRIX : 0.0000s | 2495 comparaisons | 2493 décalages
 Tri FUSION par PRIX : 0.0000s | 549 comparaisons
-Tri RAPIDE par PRIX : 0.0000s | 639 comparaisons | 419 échanges
+Tri RAPIDE par PRIX : 0.0010s | 639 comparaisons | 419 échanges
 
 === TRI PAR SURFACE (100 éléments) ===
-Tri SÉLECTION par SURFACE : 0.0012s | 4950 comparaisons | 97 échanges
+Tri SÉLECTION par SURFACE : 0.0010s | 4950 comparaisons | 97 échanges
 Tri INSERTION par SURFACE : 0.0000s | 1955 comparaisons | 1946 décalages
 Tri FUSION par SURFACE : 0.0000s | 541 comparaisons
 Tri RAPIDE par SURFACE : 0.0000s | 713 comparaisons | 545 échanges
 
 === TRI PAR PRIX (500 éléments) ===
-Tri SÉLECTION par PRIX : 0.0561s | 124750 comparaisons | 495 échanges
-Tri INSERTION par PRIX : 0.0321s | 67224 comparaisons | 67220 décalages
-Tri FUSION par PRIX : 0.0029s | 3866 comparaisons
-Tri RAPIDE par PRIX : 0.0027s | 4578 comparaisons | 3027 échanges
+Tri SÉLECTION par PRIX : 0.0190s | 124750 comparaisons | 495 échanges
+Tri INSERTION par PRIX : 0.0120s | 67224 comparaisons | 67220 décalages
+Tri FUSION par PRIX : 0.0010s | 3866 comparaisons
+Tri RAPIDE par PRIX : 0.0020s | 4578 comparaisons | 3027 échanges
 
 === TRI PAR SURFACE (500 éléments) ===
-Tri SÉLECTION par SURFACE : 0.0459s | 124750 comparaisons | 488 échanges
-Tri INSERTION par SURFACE : 0.0323s | 61136 comparaisons | 61124 décalages
-Tri FUSION par SURFACE : 0.0038s | 3833 comparaisons
-Tri RAPIDE par SURFACE : 0.0016s | 6995 comparaisons | 5231 échanges
+Tri SÉLECTION par SURFACE : 0.0190s | 124750 comparaisons | 488 échanges
+Tri INSERTION par SURFACE : 0.0110s | 61136 comparaisons | 61124 décalages
+Tri FUSION par SURFACE : 0.0010s | 3833 comparaisons
+Tri RAPIDE par SURFACE : 0.0010s | 6995 comparaisons | 5231 échanges
 
 === TRI PAR PRIX (1000 éléments) ===
-Tri SÉLECTION par PRIX : 0.1892s | 498501 comparaisons | 993 échanges
-Tri INSERTION par PRIX : 0.0885s | 252919 comparaisons | 252915 décalages
-Tri FUSION par PRIX : 0.0123s | 8696 comparaisons
-Tri RAPIDE par PRIX : 0.0053s | 12854 comparaisons | 9654 échanges
+Tri SÉLECTION par PRIX : 0.0765s | 498501 comparaisons | 993 échanges
+Tri INSERTION par PRIX : 0.0460s | 252919 comparaisons | 252915 décalages
+Tri FUSION par PRIX : 0.0030s | 8696 comparaisons
+Tri RAPIDE par PRIX : 0.0020s | 12854 comparaisons | 9654 échanges
 
 === TRI PAR SURFACE (1000 éléments) ===
-Tri SÉLECTION par SURFACE : 0.1460s | 498501 comparaisons | 988 échanges
-Tri INSERTION par SURFACE : 0.0889s | 241162 comparaisons | 241148 décalages
-Tri FUSION par SURFACE : 0.0040s | 8686 comparaisons
-Tri RAPIDE par SURFACE : 0.0067s | 21264 comparaisons | 17351 échanges
+Tri SÉLECTION par SURFACE : 0.0720s | 498501 comparaisons | 988 échanges
+Tri INSERTION par SURFACE : 0.0431s | 241162 comparaisons | 241148 décalages
+Tri FUSION par SURFACE : 0.0020s | 8686 comparaisons
+Tri RAPIDE par SURFACE : 0.0030s | 21264 comparaisons | 17351 échanges
+Recherche linéaire MAISONS PARIS (500) : 0.0000s | 500 comparaisons | Trouvées: 10
+Recherche binaire PRIX 350000€ (500) : 0.0000s | 5 comparaisons | Position: 295
+Min/Max PRIX_M2 (500) : 0.0000s | 998 comparaisons | Min: 985.0€/m² | Max: 12777.0€/m²
+Recherche APPART 3P (500) : 0.0000s | 500 comparaisons | Trouvés: 60
+Recherche linéaire MAISONS PARIS (1000) : 0.0000s | 999 comparaisons | Trouvées: 17
+Recherche binaire PRIX 350000€ (1000) : 0.0000s | 7 comparaisons | Position: 600
+Min/Max PRIX_M2 (1000) : 0.0000s | 1996 comparaisons | Min: 985.0€/m² | Max: 13785.0€/m²
+Recherche APPART 3P (1000) : 0.0000s | 999 comparaisons | Trouvés: 91
+
+=== FIN DES RÉSULTATS ===
