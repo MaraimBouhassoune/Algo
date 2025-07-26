@@ -1,0 +1,19 @@
+1. Y a-t-il une différence de performance entre trier par prix vs trier par surface ? Laquelle et pourquoi ?
+
+Il y a quelques différences, mais elles ne sont pas énormes. Parfois, trier par surface va un peu plus vite ou fait moins de comparaisons, parfois c’est l’inverse. Ça dépend surtout de comment sont réparties les valeurs dans chaque colonne. Mais globalement, pour un même tri, les performances restent assez proches.
+
+2. Quel algorithme de tri est le plus rapide sur 1000 biens immobiliers ? Le classement change-t-il selon le critère (prix/surface) ?
+
+Le plus rapide, c’est clairement le tri fusion, puis le tri rapide. Les tris sélection et insertion sont beaucoup plus lents. Le classement ne change pas vraiment que ce soit pour le prix ou la surface : fusion et rapide sont toujours devant.
+
+3. Le tri fusion est-il plus stable que le tri rapide pour les données immobilières ? Observez plusieurs exécutions.
+
+Oui, le tri fusion garde toujours l’ordre des biens qui ont la même valeur (prix ou surface), alors que le tri rapide peut les mélanger. J’ai testé plusieurs fois et le résultat du tri fusion ne change jamais pour les ex-aequo, alors que le tri rapide, si.
+
+4. Pour trier 10 000 annonces immobilières par prix, quel algorithme recommanderiez-vous et pourquoi ?
+
+Je choisirais le tri fusion, parce qu’il est rapide et stable. Le tri rapide marche bien aussi, mais il peut parfois être moins prévisible. Les tris sélection et insertion, il ne faut même pas essayer sur autant de données, c’est trop lent.
+
+5. Avez-vous observé des différences significatives entre O(n²) et O(n log n) sur vos données réelles ?
+
+Oui Les tris O(n²) (sélection, insertion) prennent beaucoup plus de temps et font énormément de comparaisons. Les tris fusion et rapide (O(n log n)) sont beaucoup plus efficaces, surtout quand il y a beaucoup de biens à trier. 
