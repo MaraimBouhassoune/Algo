@@ -25,7 +25,7 @@ from datetime import datetime
 import os
 
 
-
+# Configuration des tests
 CSV_FILE = "transactions_immobilieres.csv"
 TAILLES_TEST = [100, 500, 1000]
 CRITERES_TRI = [("prix", "PRIX"), ("surface", "SURFACE")]
@@ -49,7 +49,7 @@ def executer_tests_tri(biens_base, taille, critere_key, critere_nom):
     for algo_func, algo_nom in ALGORITHMES_TRI:
         try:
             if algo_nom == "FUSION":
-              
+                # Tri fusion retourne (liste, comparaisons, temps)
                 trie, comparaisons, temps = algo_func(echantillon, critere_key)
                 operations = 0  
                 type_ops = ""
@@ -100,7 +100,7 @@ def executer_tests_recherche(biens_base, taille):
         
         biens_tries_prix, _, _ = tri_fusion(echantillon, "prix")
         
-        
+        # Test 1: Recherche linéaire - Maisons à Paris
         nb_maisons, comp_maisons, temps_maisons = recherche_lineaire(
             echantillon,
             lambda x: x.get("type_local") == "Maison" and x.get("commune") == "PARIS"
@@ -116,7 +116,7 @@ def executer_tests_recherche(biens_base, taille):
             'resultats': nb_maisons
         })
         
-        
+        # Test 2: Recherche binaire - Prix 350000€
         pos_prix, comp_prix, temps_prix = recherche_binaire(biens_tries_prix, 350000, "prix")
         print(f"Recherche binaire 350000€ ({taille:>4})        : {temps_prix:>8.6f}s | {comp_prix:>4} cmp | pos {pos_prix}")
         
@@ -129,7 +129,7 @@ def executer_tests_recherche(biens_base, taille):
             'resultats': pos_prix
         })
         
-        
+        # Test 3: Min/Max - Prix au m²
         min_prix_m2, max_prix_m2, comp_minmax, temps_minmax = recherche_min_max(echantillon, "prix_m2")
         print(f"Min/Max PRIX_M2 ({taille:>4})               : {temps_minmax:>8.6f}s | {comp_minmax:>4} cmp | {min_prix_m2:.0f} – {max_prix_m2:.0f} €/m²")
         
@@ -142,7 +142,7 @@ def executer_tests_recherche(biens_base, taille):
             'resultats': f"{min_prix_m2:.0f}-{max_prix_m2:.0f}"
         })
         
-       
+        # Test 4: Recherche linéaire - Appartements 3 pièces
         nb_appart3p, comp_appart3p, temps_appart3p = recherche_lineaire(
             echantillon,
             lambda x: x.get("type_local") == "Appartement" and str(x.get("nb_pieces")) == "3"
@@ -192,7 +192,7 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
                                if r['taille'] == taille and r['critere'] == critere_nom]
             
             if resultats_filtrés:
-                
+                # Tri par temps pour le classement
                 resultats_filtrés.sort(key=lambda x: x['temps'])
                 
                 for i, r in enumerate(resultats_filtrés, 1):
@@ -331,6 +331,7 @@ def main():
         return
     
  
+    # Chargement des données
     print("\n📂 CHARGEMENT DES DONNÉES")
     print("-" * 30)
     biens_complets = lire_csv_biens(CSV_FILE)
@@ -351,7 +352,7 @@ def main():
     tous_resultats_recherche = []
     logs_execution = []
     
-     
+    # PHASE 1 : Tests des algorithmes de tri
     print("\n🔄 PHASE 1 : TESTS DES ALGORITHMES DE TRI")
     print("=" * 50)
     
@@ -360,7 +361,7 @@ def main():
             resultats = executer_tests_tri(biens_complets, taille, critere_key, critere_nom)
             tous_resultats_tri.extend(resultats)
     
-    
+    # PHASE 2 : Tests des algorithmes de recherche  
     print("\n🔍 PHASE 2 : TESTS DES ALGORITHMES DE RECHERCHE")
     print("=" * 50)
     
@@ -368,7 +369,7 @@ def main():
         resultats = executer_tests_recherche(biens_complets, taille)
         tous_resultats_recherche.extend(resultats)
     
- 
+    # PHASE 3 : Génération des rapports
     print("\n📊 PHASE 3 : GÉNÉRATION DES RAPPORTS")
     print("=" * 40)
     
