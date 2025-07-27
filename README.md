@@ -28,7 +28,7 @@ python main.py
 ```
 Lance tous les tests :
 - **Tris** : 4 algorithmes × 2 critères × 3 tailles = 24 tests
-- **Recherches** : 4 types × 2 tailles = 8 tests
+- **Recherches** : 4 types × 3 tailles = 12 tests
 
 #### Option 2 : Tests de recherche uniquement
 ```bash
@@ -45,11 +45,17 @@ Lance les tests de recherche sur un mini-tableau fictif (10 biens).
 - **Tri Sélection** : Le plus lent (O(n²))
 
 #### Algorithmes de Recherche
-- **Recherche Binaire** : Très rapide (O(log n)) - 5-7 comparaisons sur 500-1000 éléments
-- **Recherche Linéaire** : Linéaire (O(n)) - 500-999 comparaisons
+- **Recherche Binaire** : Très rapide (O(log n)) - 6-7 comparaisons sur 100-1000 éléments
+- **Recherche Linéaire** : Linéaire (O(n)) - 100-999 comparaisons
 - **Recherche Min/Max** : Efficace en un seul parcours
 
 ### 🔍 Tests de recherche effectués
+
+#### Sur 100 éléments :
+- Maisons à Paris : 5 trouvées
+- Prix exact 350000€ : Position 50 (recherche binaire)
+- Prix au m² : Min 1312€/m², Max 11702€/m²
+- Appartements 3 pièces : 27 trouvés
 
 #### Sur 500 éléments :
 - Maisons à Paris : 10 trouvées
@@ -69,6 +75,7 @@ Lance les tests de recherche sur un mini-tableau fictif (10 biens).
 2. **Recherche binaire** : 100x plus rapide que la recherche linéaire
 3. **Stabilité** : Le tri fusion est plus stable que le tri rapide
 4. **Données réelles** : Les performances varient selon la distribution des données
+5. **Progression cohérente** : Les résultats évoluent logiquement avec la taille des données
 
 ### 🛠️ Technologies utilisées
 - **Python** (sans bibliothèques externes)
@@ -78,10 +85,6 @@ Lance les tests de recherche sur un mini-tableau fictif (10 biens).
 
 ### 📝 Analyse complète
 Consultez `analyse.txt` pour les réponses détaillées aux 10 questions d'analyse du projet.
-
-### 👥 Répartition du travail
-- **Personne 1** : Lecture CSV, algorithmes de tri, tests de tri, analyse tris (Q1-5)
-- **Personne 2** : Algorithmes de recherche, tests de recherche, analyse recherches (Q6-10)
 
 ### ✅ Validation
 Le projet respecte toutes les contraintes :

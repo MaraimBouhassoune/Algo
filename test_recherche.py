@@ -9,9 +9,7 @@ from algorithmes_recherche import (
     format_resultat_recherche_lineaire, format_resultat_recherche_binaire, format_resultat_min_max
 )
 
-# =========================
-# Mini-tableau de test (fictif)
-# =========================
+
 biens_test = [
     {'prix': 200000, 'surface': 50, 'type_local': 'Appartement', 'commune': 'PARIS', 'nb_pieces': 2, 'prix_m2': 4000},
     {'prix': 350000, 'surface': 80, 'type_local': 'Maison', 'commune': 'PARIS', 'nb_pieces': 4, 'prix_m2': 4375},
@@ -25,12 +23,10 @@ biens_test = [
     {'prix': 120000, 'surface': 25, 'type_local': 'Appartement', 'commune': 'LILLE', 'nb_pieces': 1, 'prix_m2': 4800}
 ]
 
-# Tableau trié par prix (pour la recherche binaire)
+
 biens_tries_prix = sorted(biens_test, key=lambda x: x['prix'])
 
-# =========================
-# Tests des algorithmes de recherche
-# =========================
+
 
 def tester_recherche_lineaire_maisons_paris():
     """Test : Recherche de toutes les maisons à Paris"""
@@ -77,9 +73,7 @@ def tester_recherche_min_max_prix_m2():
     print(f"Min/Max PRIX_M2 : {temps:.4f}s | {nb_comp} comparaisons | Min: {vmin}€/m² | Max: {vmax}€/m²")
     return resultat
 
-# =========================
-# Fonction principale de test
-# =========================
+
 
 def lancer_tous_les_tests():
     """Lance tous les tests et sauvegarde les résultats"""
@@ -88,27 +82,27 @@ def lancer_tous_les_tests():
     
     resultats = []
     
-    # Test 1 : Maisons à Paris
+    
     resultat1 = tester_recherche_lineaire_maisons_paris()
     resultats.append(resultat1)
     print()
-    
-    # Test 2 : Appartements 3 pièces
+   
+   
     resultat2 = tester_recherche_lineaire_appart_3p()
     resultats.append(resultat2)
     print()
     
-    # Test 3 : Recherche binaire prix 350000€
+   
     resultat3 = tester_recherche_binaire_prix()
     resultats.append(resultat3)
     print()
     
-    # Test 4 : Min/Max prix au m²
+    
     resultat4 = tester_recherche_min_max_prix_m2()
     resultats.append(resultat4)
     print()
     
-    # Sauvegarde dans resultats.txt
+   
     sauvegarder_resultats(resultats)
     
     print("✅ Tests terminés ! Résultats sauvegardés dans resultats.txt")
@@ -123,9 +117,7 @@ def sauvegarder_resultats(resultats):
             f.write(f"Test {i} : {resultat}\n")
         f.write("\n=== FIN DES RÉSULTATS ===\n")
 
-# =========================
-# Lancement des tests
-# =========================
+
 
 if __name__ == "__main__":
     lancer_tous_les_tests() 
