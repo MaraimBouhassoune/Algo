@@ -259,7 +259,116 @@ def comparer_algorithmes_tri(biens, key, taille_echantillon=None):
             print(f"{nom:<15} : {temps:>8.4f}s | {comp:>6} comparaisons | {ops:>6} {ops_nom}")
             resultats.append((nom, temps, comp, ops))
         
+        # Validation
+        valide, msg = valider_tri(biens, trie, key)
+        if not valide:
+            print(f"❌ ERREUR dans {nom}: {msg}")
+    
+    return resultats
+
+
+# =========================
+# 🏆 BONUS : TRI PAR TAS (HEAP SORT)
+# =========================
+def tri_tas(lst, key):
+    """
+    🏆 BONUS : Tri par tas (Heap Sort)
+    Complexité : O(n log n) dans TOUS les cas (garantie)
+    Avantages : 
+    - Tri in-place (pas de mémoire supplémentaire)
+    - Performance stable indépendamment des données
+    - Algorithme avancé démontrant la maîtrise des structures de données
+    """
+    if not lst:
+        return [], 0, 0, 0.0
+    
+    t0 = _now()
+    tab = lst.copy()
+    n = len(tab)
+    comp = [0]
+    exch = [0]
+
+    def _heapify(arr, n, i):
+        """
+        Transforme un sous-arbre en tas max.
+        Assure que la propriété du tas est respectée.
+        """
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+
+        # Vérifier si l'enfant gauche existe et est plus grand
+        if left < n:
+            comp[0] += 1
+            if _get_numeric_value(arr[left], key) > _get_numeric_value(arr[largest], key):
+                largest = left
+
+        # Vérifier si l'enfant droit existe et est plus grand
+        if right < n:
+            comp[0] += 1
+            if _get_numeric_value(arr[right], key) > _get_numeric_value(arr[largest], key):
+                largest = right
+
+        # Si le plus grand n'est pas la racine, échanger et réorganiser
+        if largest != i:
+            arr[i], arr[largest] = arr[largest], arr[i]
+            exch[0] += 1
+            _heapify(arr, n, largest)
+
+    def _build_heap(arr, n):
+        """
+        Construit un tas max à partir du tableau.
+        Commence par les nœuds non-feuilles et remonte vers la racine.
+        """
+        for i in range(n // 2 - 1, -1, -1):
+            _heapify(arr, n, i)
+
+    # ÉTAPE 1 : Construire le tas max
+    _build_heap(tab, n)
+
+    # ÉTAPE 2 : Extraire les éléments un par un
+    for i in range(n - 1, 0, -1):
+        # Échanger la racine (max) avec le dernier élément
+        tab[0], tab[i] = tab[i], tab[0]
+        exch[0] += 1
         
+        # Réorganiser le tas sur la partie non triée
+        _heapify(tab, i, 0)
+
+    return tab, comp[0], exch[0], _now() - t0
+
+
+def comparer_tous_algorithmes_avec_bonus(biens, key, taille_echantillon=None):
+    """
+    🏆 BONUS : Compare TOUS les algorithmes incluant le tri par tas
+    """
+    if taille_echantillon:
+        biens = biens[:taille_echantillon]
+    
+    algorithmes = [
+        (tri_selection, "TRI SÉLECTION"),
+        (tri_insertion, "TRI INSERTION"),
+        (tri_fusion, "TRI FUSION"),
+        (tri_rapide, "TRI RAPIDE"),
+        (tri_tas, "🏆 TRI PAR TAS (BONUS)")
+    ]
+    
+    print(f"\n🏆 COMPARAISON COMPLÈTE AVEC BONUS sur {len(biens)} éléments (clé: {key})")
+    print("=" * 80)
+    
+    resultats = []
+    for algo_func, nom in algorithmes:
+        if nom == "TRI FUSION":
+            trie, comp, temps = algo_func(biens, key)
+            print(f"{nom:<25} : {temps:>8.4f}s | {comp:>6} comparaisons")
+            resultats.append((nom, temps, comp, 0))
+        else:
+            trie, comp, ops, temps = algo_func(biens, key)
+            ops_nom = "décalages" if nom == "TRI INSERTION" else "échanges"
+            print(f"{nom:<25} : {temps:>8.4f}s | {comp:>6} comparaisons | {ops:>6} {ops_nom}")
+            resultats.append((nom, temps, comp, ops))
+        
+        # Validation
         valide, msg = valider_tri(biens, trie, key)
         if not valide:
             print(f"❌ ERREUR dans {nom}: {msg}")
