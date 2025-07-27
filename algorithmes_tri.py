@@ -1,125 +1,113 @@
-import time
 
-def tri_selection(liste, cle):
-    """
-    Tri par sélection sur la clé donnée.
-    Retourne : (liste_triee, nb_comparaisons, nb_echanges, temps_execution)
-    """
-    t0 = time.time()
-    tab = liste.copy()
+"""
+Implémentation des 4 algorithmes de tri :
+  • Sélection   • Insertion
+  • Fusion      • Rapide (pivot aléatoire)
+
+Chaque fonction renvoie :
+    (liste triée, nb_comparaisons, nb_échanges|décalages, temps_sec)
+"""
+
+from time import perf_counter as _now
+from random import randint
+
+
+# --------------------------------------------------------------------------- #
+def tri_selection(lst, key):
+    t0 = _now()
+    tab = lst.copy()
     n = len(tab)
-    nb_comparaisons = 0
-    nb_echanges = 0
-    for i in range(n-1):
+    comp = exch = 0
+
+    for i in range(n - 1):
         min_idx = i
-        for j in range(i+1, n):
-            nb_comparaisons += 1
-            if float(tab[j][cle]) < float(tab[min_idx][cle]):
+        for j in range(i + 1, n):
+            comp += 1
+            if float(tab[j][key]) < float(tab[min_idx][key]):
                 min_idx = j
         if min_idx != i:
             tab[i], tab[min_idx] = tab[min_idx], tab[i]
-            nb_echanges += 1
-    t1 = time.time()
-    temps_execution = t1 - t0
-    return tab, nb_comparaisons, nb_echanges, temps_execution
+            exch += 1
+    return tab, comp, exch, _now() - t0
 
-def tri_insertion(liste, cle):
-    """
-    Tri par insertion sur la clé donnée.
-    Retourne : (liste_triee, nb_comparaisons, nb_decalages, temps_execution)
-    """
-    import time
-    t0 = time.time()
-    tab = liste.copy()
-    n = len(tab)
-    nb_comparaisons = 0
-    nb_decalages = 0
-    for i in range(1, n):
-        clef = tab[i]
+
+# --------------------------------------------------------------------------- #
+def tri_insertion(lst, key):
+    t0 = _now()
+    tab = lst.copy()
+    comp = shift = 0
+
+    for i in range(1, len(tab)):
+        pivot = tab[i]
         j = i - 1
-        while j >= 0:
-            nb_comparaisons += 1
-            if float(tab[j][cle]) > float(clef[cle]):
-                tab[j + 1] = tab[j]
-                nb_decalages += 1
-                j -= 1
-            else:
-                break
-        tab[j + 1] = clef
+        while j >= 0 and float(tab[j][key]) > float(pivot[key]):
+            comp += 1
+            tab[j + 1] = tab[j]
+            shift += 1
+            j -= 1
+        comp += 1                      
+        tab[j + 1] = pivot
         if j + 1 != i:
-            nb_decalages += 1  
-    t1 = time.time()
-    temps_execution = t1 - t0
-    return tab, nb_comparaisons, nb_decalages, temps_execution
+            shift += 1
+    return tab, comp, shift, _now() - t0
 
-def tri_fusion(liste, cle):
-    """
-    Tri fusion sur la clé donnée.
-    Retourne : (liste_triee, nb_comparaisons, temps_execution)
-    """
-    import time
-    t0 = time.time()
-    nb_comparaisons = [0]  
 
-    def fusion(tab, cle):
+# --------------------------------------------------------------------------- #
+def tri_fusion(lst, key):
+    t0 = _now()
+    comp = [0]
+
+    def _merge(a, b):
+        res, i, j = [], 0, 0
+        while i < len(a) and j < len(b):
+            comp[0] += 1
+            if float(a[i][key]) <= float(b[j][key]):
+                res.append(a[i]); i += 1
+            else:
+                res.append(b[j]); j += 1
+        res.extend(a[i:]); res.extend(b[j:])
+        return res
+
+    def _sort(tab):
         if len(tab) <= 1:
             return tab
-        mid = len(tab) // 2
-        gauche = fusion(tab[:mid], cle)
-        droite = fusion(tab[mid:], cle)
-        return fusionner(gauche, droite, cle)
+        m = len(tab) // 2
+        return _merge(_sort(tab[:m]), _sort(tab[m:]))
 
-    def fusionner(gauche, droite, cle):
-        resultat = []
-        i = j = 0
-        while i < len(gauche) and j < len(droite):
-            nb_comparaisons[0] += 1
-            if float(gauche[i][cle]) <= float(droite[j][cle]):
-                resultat.append(gauche[i])
+    return _sort(lst.copy()), comp[0], _now() - t0
+
+
+# --------------------------------------------------------------------------- #
+def tri_rapide(lst, key):
+    t0 = _now()
+    tab = lst.copy()
+    comp = [0]
+    exch = [0]
+
+    def _partition(lo, hi):
+        p = randint(lo, hi)           
+        tab[p], tab[hi] = tab[hi], tab[p]
+        exch[0] += 1
+
+        pivot = float(tab[hi][key])
+        i = lo - 1
+        for j in range(lo, hi):
+            comp[0] += 1
+            if float(tab[j][key]) <= pivot:
                 i += 1
-            else:
-                resultat.append(droite[j])
-                j += 1
-        resultat.extend(gauche[i:])
-        resultat.extend(droite[j:])
-        return resultat
-
-    tab_trie = fusion(liste.copy(), cle)
-    t1 = time.time()
-    temps_execution = t1 - t0
-    return tab_trie, nb_comparaisons[0], temps_execution
-
-def tri_rapide(liste, cle):
-    """
-    Tri rapide (quick sort) sur la clé donnée.
-    Retourne : (liste_triee, nb_comparaisons, nb_echanges, temps_execution)
-    """
-    import time
-    t0 = time.time()
-    tab = liste.copy()
-    nb_comparaisons = [0]
-    nb_echanges = [0]
-
-    def quicksort(tab, debut, fin, cle):
-        if debut < fin:
-            pivot_idx = partition(tab, debut, fin, cle)
-            quicksort(tab, debut, pivot_idx - 1, cle)
-            quicksort(tab, pivot_idx + 1, fin, cle)
-
-    def partition(tab, debut, fin, cle):
-        pivot = float(tab[fin][cle])
-        i = debut - 1
-        for j in range(debut, fin):
-            nb_comparaisons[0] += 1
-            if float(tab[j][cle]) <= pivot:
-                i += 1
-                tab[i], tab[j] = tab[j], tab[i]
-                nb_echanges[0] += 1
-        tab[i + 1], tab[fin] = tab[fin], tab[i + 1]
-        nb_echanges[0] += 1
+                if i != j:
+                    tab[i], tab[j] = tab[j], tab[i]
+                    exch[0] += 1
+        if i + 1 != hi:
+            tab[i + 1], tab[hi] = tab[hi], tab[i + 1]
+            exch[0] += 1
         return i + 1
 
-    quicksort(tab, 0, len(tab) - 1, cle)
-    t1 = time.time()
-    temps_execution = t1 - t0
-    return tab, nb_comparaisons[0], nb_echanges[0], temps_execution 
+    def _quicksort(lo, hi):
+        if lo < hi:
+            p = _partition(lo, hi)
+            _quicksort(lo, p - 1)
+            _quicksort(p + 1, hi)
+
+    _quicksort(0, len(tab) - 1)
+    return tab, comp[0], exch[0], _now() - t0

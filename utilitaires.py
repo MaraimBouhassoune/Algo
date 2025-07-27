@@ -1,22 +1,23 @@
-def lire_csv_biens(chemin_fichier, nb_elements=None):
-    """
-    Lit un fichier CSV d'immobilier et retourne une liste de dictionnaires.
-    :param chemin_fichier: chemin du fichier CSV
-    :param nb_elements: nombre d'éléments à lire (None = tout)
-    :return: liste de dictionnaires
-    """
+
+"""
+Lecture « maison » du CSV : renvoie une liste de dictionnaires.
+Aucune bibliothèque externe.
+"""
+
+def lire_csv_biens(path, n_max=None):
     biens = []
-    with open(chemin_fichier, 'r', encoding='utf-8') as f:
+    with open(path, encoding="utf-8") as f:
         lignes = f.readlines()
-        if not lignes:
-            return biens
-        en_tete = lignes[0].strip().split(',')
-        for ligne in lignes[1:]:
-            if nb_elements is not None and len(biens) >= nb_elements:
-                break
-            valeurs = ligne.strip().split(',')
-            if len(valeurs) != len(en_tete):
-                continue  
-            bien = {col: val for col, val in zip(en_tete, valeurs)}
-            biens.append(bien)
-    return biens 
+
+    if not lignes:
+        return biens
+
+    header = lignes[0].strip().split(',')
+    for line in lignes[1:]:
+        if n_max is not None and len(biens) >= n_max:
+            break
+        vals = line.strip().split(',')
+        if len(vals) != len(header):
+            continue
+        biens.append(dict(zip(header, vals)))
+    return biens
