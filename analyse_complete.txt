@@ -1,97 +1,97 @@
 ================================================================================
 RAPPORT D'ANALYSE DE PERFORMANCE - ALGORITHMES TRI & RECHERCHE
 ================================================================================
-Généré le : 27/07/2025 à 15:17:39
+Généré le : 27/07/2025 à 16:42:27
 Dataset : 999 biens immobiliers
 
 PARTIE 1 : ANALYSE DES ALGORITHMES DE TRI
 --------------------------------------------------
 
 === PRIX - 100 éléments ===
-1. RAPIDE     :    0.26ms |    612 comp |    341 échanges
-2. FUSION     :    0.35ms |    549 comp
-3. INSERTION  :    0.65ms |   2495 comp |   2493 décalages
-4. SÉLECTION  :    1.71ms |   4950 comp |     95 échanges
-→ Plus rapide : RAPIDE (0.26ms)
-→ Plus lent   : SÉLECTION (1.71ms)
-→ Facteur     : ×6.5
+1. RAPIDE     :    0.12ms |    606 comp |    280 échanges
+2. FUSION     :    0.17ms |    549 comp
+3. INSERTION  :    0.32ms |   2495 comp |   2493 décalages
+4. SÉLECTION  :    0.80ms |   4950 comp |     95 échanges
+→ Plus rapide : RAPIDE (0.12ms)
+→ Plus lent   : SÉLECTION (0.80ms)
+→ Facteur     : ×6.4
 
 === SURFACE - 100 éléments ===
-1. RAPIDE     :    0.38ms |    646 comp |    312 échanges
-2. FUSION     :    0.41ms |    541 comp
-3. INSERTION  :    1.03ms |   1955 comp |   1946 décalages
-4. SÉLECTION  :    1.88ms |   4950 comp |     97 échanges
-→ Plus rapide : RAPIDE (0.38ms)
-→ Plus lent   : SÉLECTION (1.88ms)
-→ Facteur     : ×4.9
+1. RAPIDE     :    0.14ms |    686 comp |    333 échanges
+2. FUSION     :    0.16ms |    541 comp
+3. INSERTION  :    0.24ms |   1955 comp |   1946 décalages
+4. SÉLECTION  :    0.90ms |   4950 comp |     97 échanges
+→ Plus rapide : RAPIDE (0.14ms)
+→ Plus lent   : SÉLECTION (0.90ms)
+→ Facteur     : ×6.2
 
 === PRIX - 500 éléments ===
-1. RAPIDE     :    2.30ms |   4978 comp |   2218 échanges
-2. FUSION     :    3.82ms |   3866 comp
-3. INSERTION  :   18.41ms |  67224 comp |  67220 décalages
-4. SÉLECTION  :   50.68ms | 124750 comp |    495 échanges
-→ Plus rapide : RAPIDE (2.30ms)
-→ Plus lent   : SÉLECTION (50.68ms)
-→ Facteur     : ×22.1
+1. RAPIDE     :    0.91ms |   5252 comp |   2417 échanges
+2. FUSION     :    1.03ms |   3866 comp
+3. INSERTION  :    8.27ms |  67224 comp |  67220 décalages
+4. SÉLECTION  :   20.90ms | 124750 comp |    495 échanges
+→ Plus rapide : RAPIDE (0.91ms)
+→ Plus lent   : SÉLECTION (20.90ms)
+→ Facteur     : ×22.9
 
 === SURFACE - 500 éléments ===
-1. FUSION     :    2.35ms |   3833 comp
-2. RAPIDE     :    2.40ms |   7338 comp |   2117 échanges
-3. INSERTION  :   16.22ms |  61136 comp |  61124 décalages
-4. SÉLECTION  :   52.61ms | 124750 comp |    488 échanges
-→ Plus rapide : FUSION (2.35ms)
-→ Plus lent   : SÉLECTION (52.61ms)
-→ Facteur     : ×22.4
+1. RAPIDE     :    1.13ms |   7253 comp |   1745 échanges
+2. FUSION     :    1.20ms |   3833 comp
+3. INSERTION  :    7.79ms |  61136 comp |  61124 décalages
+4. SÉLECTION  :   20.68ms | 124750 comp |    488 échanges
+→ Plus rapide : RAPIDE (1.13ms)
+→ Plus lent   : SÉLECTION (20.68ms)
+→ Facteur     : ×18.2
 
 === PRIX - 1000 éléments ===
-1. FUSION     :    5.14ms |   8696 comp
-2. RAPIDE     :    7.05ms |  11809 comp |   4866 échanges
-3. INSERTION  :   71.46ms | 252919 comp | 252915 décalages
-4. SÉLECTION  :  192.26ms | 498501 comp |    993 échanges
-→ Plus rapide : FUSION (5.14ms)
-→ Plus lent   : SÉLECTION (192.26ms)
-→ Facteur     : ×37.4
+1. RAPIDE     :    2.05ms |  11566 comp |   3852 échanges
+2. FUSION     :    2.26ms |   8696 comp
+3. INSERTION  :   31.55ms | 252919 comp | 252915 décalages
+4. SÉLECTION  :   94.74ms | 498501 comp |    993 échanges
+→ Plus rapide : RAPIDE (2.05ms)
+→ Plus lent   : SÉLECTION (94.74ms)
+→ Facteur     : ×46.1
 
 === SURFACE - 1000 éléments ===
-1. FUSION     :    5.06ms |   8686 comp
-2. RAPIDE     :    7.60ms |  20650 comp |   4418 échanges
-3. INSERTION  :   71.92ms | 241162 comp | 241148 décalages
-4. SÉLECTION  :  194.93ms | 498501 comp |    988 échanges
-→ Plus rapide : FUSION (5.06ms)
-→ Plus lent   : SÉLECTION (194.93ms)
-→ Facteur     : ×38.5
+1. FUSION     :    2.41ms |   8686 comp
+2. RAPIDE     :    3.04ms |  20044 comp |   4023 échanges
+3. INSERTION  :   30.21ms | 241162 comp | 241148 décalages
+4. SÉLECTION  :   82.09ms | 498501 comp |    988 échanges
+→ Plus rapide : FUSION (2.41ms)
+→ Plus lent   : SÉLECTION (82.09ms)
+→ Facteur     : ×34.1
 
 ANALYSE DES COMPLEXITÉS
 ------------------------------
 
 Performance sur 1000 éléments (moyenne prix + surface) :
-• SÉLECTION  :  193.6ms |  498501 comparaisons
-• INSERTION  :   71.7ms |  247040 comparaisons
-• FUSION     :    5.1ms |    8691 comparaisons
-• RAPIDE     :    7.3ms |   16230 comparaisons
+• SÉLECTION  :   88.4ms |  498501 comparaisons
+• INSERTION  :   30.9ms |  247040 comparaisons
+• FUSION     :    2.3ms |    8691 comparaisons
+• RAPIDE     :    2.5ms |   15805 comparaisons
 
 PARTIE 2 : ANALYSE DES ALGORITHMES DE RECHERCHE
 -------------------------------------------------------
 
 === 100 éléments ===
-Recherche linéaire   (Maisons Paris  ) :   0.02ms |  100 comp | 5
-Recherche binaire    (350000€        ) :   0.02ms |    6 comp | 50
-Min/Max              (Prix/m²        ) :   0.03ms |  198 comp | 1312-11702
-Recherche linéaire   (Appartements 3P) :   0.03ms |  100 comp | 27
+Recherche linéaire   (Maisons Paris  ) :   0.01ms |  100 comp | 5
+Recherche binaire    (350000€        ) :   0.01ms |    6 comp | 50
+Min/Max              (Prix/m²        ) :   0.02ms |  198 comp | 1312-11702
+Recherche linéaire   (Appartements 3P) :   0.01ms |  100 comp | 27
 → Gain recherche binaire : ×17 (comparaisons)
 
 === 500 éléments ===
-Recherche linéaire   (Maisons Paris  ) :   0.07ms |  500 comp | 10
-Recherche binaire    (350000€        ) :   0.01ms |    5 comp | 295
-Min/Max              (Prix/m²        ) :   0.98ms |  998 comp | 985-12777
-Recherche linéaire   (Appartements 3P) :   0.11ms |  500 comp | 60
+Recherche linéaire   (Maisons Paris  ) :   0.03ms |  500 comp | 10
+Recherche binaire    (350000€        ) :   0.00ms |    5 comp | 295
+Min/Max              (Prix/m²        ) :   0.07ms |  998 comp | 985-12777
+Recherche linéaire   (Appartements 3P) :   0.04ms |  500 comp | 60
 → Gain recherche binaire : ×100 (comparaisons)
 
 === 1000 éléments ===
-Recherche linéaire   (Maisons Paris  ) :   0.22ms |  999 comp | 17
-Recherche binaire    (350000€        ) :   0.04ms |    7 comp | 600
-Min/Max              (Prix/m²        ) :   0.53ms | 1996 comp | 985-13785
-Recherche linéaire   (Appartements 3P) :   0.41ms |  999 comp | 91
+Recherche linéaire   (Maisons Paris  ) :   0.07ms |  999 comp | 17
+Recherche binaire    (350000€        ) :   0.00ms |    7 comp | 600
+Min/Max              (Prix/m²        ) :   0.12ms | 1996 comp | 985-13785
+Recherche linéaire   (Appartements 3P) :   0.09ms |  999 comp | 91
 → Gain recherche binaire : ×143 (comparaisons)
 
 PARTIE 3 : CONCLUSIONS ET RECOMMANDATIONS
