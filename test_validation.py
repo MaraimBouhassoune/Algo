@@ -38,13 +38,13 @@ def test_lecture_csv():
     try:
         from utilitaires import lire_csv_biens, convert_value, parse_csv_line
         
-        # Test de conversion des valeurs
+      
         assert convert_value("250000", "prix") == 250000
         assert convert_value("3846.5", "prix_m2") == 3846.5
         assert convert_value("PARIS", "commune") == "PARIS"
         print("   ✅ Conversion des valeurs : OK")
         
-        # Test du parsing CSV
+      
         ligne_test = '2023-01-15,250000,65,PARIS,Appartement,2,75001,3846'
         valeurs = parse_csv_line(ligne_test)
         assert len(valeurs) == 8
@@ -66,7 +66,7 @@ def test_algorithmes_tri():
     try:
         from algorithmes_tri import tri_selection, tri_insertion, tri_fusion, tri_rapide, valider_tri
         
-        # Données de test simples
+    
         biens_test = [
             {"prix": 300, "surface": 80, "nom": "Bien1"},
             {"prix": 150, "surface": 50, "nom": "Bien2"},
@@ -76,7 +76,6 @@ def test_algorithmes_tri():
         
         prix_attendus = [150, 200, 300, 450]
         
-        # Test de chaque algorithme
         algorithmes = [
             (tri_selection, "Sélection"),
             (tri_insertion, "Insertion"),
@@ -96,7 +95,7 @@ def test_algorithmes_tri():
                     assert comp > 0, f"Aucune comparaison pour {nom}"
                     assert ops >= 0, f"Opérations négatives pour {nom}"
                 
-                # Vérification de l'ordre
+             
                 prix_trie = [bien["prix"] for bien in trie]
                 assert prix_trie == prix_attendus, f"Tri incorrect pour {nom}: {prix_trie}"
                 
@@ -120,7 +119,7 @@ def test_algorithmes_recherche():
     try:
         from algorithmes_recherche import recherche_lineaire, recherche_binaire, recherche_min_max
         
-        # Données de test
+    
         biens_test = [
             {"prix": 150, "surface": 50, "type_local": "Appartement", "commune": "PARIS", "nb_pieces": "2", "prix_m2": 3000},
             {"prix": 200, "surface": 60, "type_local": "Maison", "commune": "PARIS", "nb_pieces": "3", "prix_m2": 3333},
@@ -128,7 +127,7 @@ def test_algorithmes_recherche():
             {"prix": 350, "surface": 90, "type_local": "Appartement", "commune": "PARIS", "nb_pieces": "3", "prix_m2": 3889},
         ]
         
-        # Test recherche linéaire
+     
         nb_paris, comp, temps = recherche_lineaire(
             biens_test, 
             lambda x: x["commune"] == "PARIS"
@@ -137,13 +136,13 @@ def test_algorithmes_recherche():
         assert comp == 4, f"Nombre de comparaisons incorrect: {comp} != 4"
         print(f"   ✅ Recherche linéaire : OK ({nb_paris} trouvés, {comp} comparaisons)")
         
-        # Test recherche binaire (nécessite tri)
+        
         biens_tries = sorted(biens_test, key=lambda x: x["prix"])
         pos, comp, temps = recherche_binaire(biens_tries, 300, "prix")
         assert pos >= 0, f"Position invalide: {pos}"
         print(f"   ✅ Recherche binaire : OK (position {pos}, {comp} comparaisons)")
         
-        # Test min/max
+        
         min_prix, max_prix, comp, temps = recherche_min_max(biens_test, "prix")
         assert min_prix == 150, f"Prix minimum incorrect: {min_prix} != 150"
         assert max_prix == 350, f"Prix maximum incorrect: {max_prix} != 350"
@@ -164,18 +163,18 @@ def test_fichier_csv():
         import os
         from utilitaires import lire_csv_biens
         
-        # Vérification existence
+
         if not os.path.exists("transactions_immobilieres.csv"):
             print("   ❌ Fichier transactions_immobilieres.csv non trouvé")
             return False
         
-        # Test de lecture
+      
         biens = lire_csv_biens("transactions_immobilieres.csv", n_max=10)
         if len(biens) == 0:
             print("   ❌ Aucune donnée lue du fichier CSV")
             return False
         
-        # Vérification structure
+    
         premier_bien = biens[0]
         champs_requis = ['prix', 'surface', 'commune', 'type_local']
         for champ in champs_requis:
@@ -196,29 +195,28 @@ def test_conformite_cahier_charges():
     print("\n🧪 TEST : Conformité cahier des charges")
     
     checks = []
-    
-    # Vérification 1 : 4 algorithmes de tri implémentés
+   
     try:
         from algorithmes_tri import tri_selection, tri_insertion, tri_fusion, tri_rapide
         checks.append("✅ 4 algorithmes de tri implémentés")
     except ImportError as e:
         checks.append(f"❌ Algorithmes de tri manquants : {e}")
     
-    # Vérification 2 : 3 algorithmes de recherche implémentés  
+    
     try:
         from algorithmes_recherche import recherche_lineaire, recherche_binaire, recherche_min_max
         checks.append("✅ 3 algorithmes de recherche implémentés")
     except ImportError as e:
         checks.append(f"❌ Algorithmes de recherche manquants : {e}")
     
-    # Vérification 3 : Fichier principal existe
+    
     import os
     if os.path.exists("main.py"):
         checks.append("✅ Fichier main.py présent")
     else:
         checks.append("❌ Fichier main.py manquant")
     
-    # Vérification 4 : Comptage des opérations
+    
     try:
         from algorithmes_tri import tri_selection
         biens_test = [{"prix": 100}, {"prix": 200}]
@@ -228,22 +226,22 @@ def test_conformite_cahier_charges():
     except Exception as e:
         checks.append(f"❌ Problème comptage opérations : {e}")
     
-    # Vérification 5 : Fichiers de résultats
+ 
     if os.path.exists("resultats.txt"):
         checks.append("✅ Fichier resultats.txt généré")
     else:
         checks.append("⚠️  Fichier resultats.txt non trouvé (exécuter main.py)")
     
-    # Affichage des résultats
+   
     for check in checks:
         print(f"   {check}")
     
-    # Calcul du score
+    
     score = sum(1 for check in checks if check.startswith("✅"))
     total = len(checks)
     print(f"\n   📊 SCORE DE CONFORMITÉ : {score}/{total} ({100*score/total:.0f}%)")
     
-    return score >= total - 1  # Tolérance d'1 erreur
+    return score >= total - 1  
 
 
 def executer_tous_les_tests():
@@ -273,7 +271,7 @@ def executer_tous_les_tests():
             print(f"❌ ERREUR dans {nom_test}: {e}")
             resultats.append(False)
     
-    # Résumé final
+   
     print(f"\n🎯 RÉSUMÉ DES TESTS")
     print("=" * 20)
     reussis = sum(resultats)

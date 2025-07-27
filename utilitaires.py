@@ -24,7 +24,7 @@ def lire_csv_biens(path, n_max=None):
     if not lignes:
         return biens
 
-    # Extraction de l'en-tête
+  
     header = lignes[0].strip().split(',')
     
     for i, line in enumerate(lignes[1:], 1):
@@ -32,17 +32,17 @@ def lire_csv_biens(path, n_max=None):
             break
             
         line = line.strip()
-        if not line:  # Ignore les lignes vides
+        if not line:  
             continue
             
-        # Parsing plus robuste pour gérer les virgules dans les données
+       
         vals = parse_csv_line(line)
         
         if len(vals) != len(header):
             print(f"Ligne {i+1} ignorée : nombre de colonnes incorrect ({len(vals)} vs {len(header)})")
             continue
             
-        # Création du dictionnaire avec conversion des types
+       
         bien = {}
         for j, (key, val) in enumerate(zip(header, vals)):
             bien[key] = convert_value(val, key)
@@ -74,7 +74,7 @@ def parse_csv_line(line):
             current_val += char
         i += 1
     
-    # Ajouter la dernière valeur
+ 
     vals.append(current_val.strip())
     return vals
 
@@ -83,26 +83,26 @@ def convert_value(value, key):
     """
     Convertit une valeur selon le type attendu pour la clé donnée.
     """
-    value = value.strip().strip('"')  # Enlever les espaces et guillemets
+    value = value.strip().strip('"')  
     
     if not value:
         return value
     
-    # Colonnes numériques entières
+    
     if key in {"prix", "surface", "nb_pieces", "code_postal"}:
         try:
-            return int(float(value))  # float d'abord pour gérer "3.0" -> 3
+            return int(float(value))  
         except (ValueError, TypeError):
             return value
     
-    # Colonnes numériques décimales
+  
     elif key in {"prix_m2"}:
         try:
             return float(value)
         except (ValueError, TypeError):
             return value
     
-    # Colonnes texte
+    
     else:
         return value
 
@@ -118,7 +118,7 @@ def afficher_statistiques_dataset(biens):
     print(f"\n📊 STATISTIQUES DU DATASET")
     print(f"   • Nombre total de biens : {len(biens)}")
     
-    # Répartition par type
+    
     types = {}
     for bien in biens:
         t = bien.get('type_local', 'Inconnu')
@@ -128,12 +128,12 @@ def afficher_statistiques_dataset(biens):
     for type_bien, count in sorted(types.items()):
         print(f"     - {type_bien} : {count}")
     
-    # Plage de prix
+   
     prix_valides = [bien['prix'] for bien in biens if isinstance(bien['prix'], (int, float))]
     if prix_valides:
         print(f"   • Prix : {min(prix_valides):,}€ → {max(prix_valides):,}€")
     
-    # Plage de surfaces
+   
     surfaces_valides = [bien['surface'] for bien in biens if isinstance(bien['surface'], (int, float))]
     if surfaces_valides:
         print(f"   • Surface : {min(surfaces_valides)}m² → {max(surfaces_valides)}m²")
@@ -151,14 +151,14 @@ def valider_donnees(biens):
     erreurs = 0
     
     for i, bien in enumerate(biens):
-        # Vérifier les champs obligatoires
+       
         champs_requis = ['prix', 'surface', 'type_local', 'commune']
         for champ in champs_requis:
             if champ not in bien or not bien[champ]:
                 print(f"⚠️  Bien {i+1} : champ '{champ}' manquant")
                 erreurs += 1
         
-        # Vérifier la cohérence des valeurs numériques
+        
         if isinstance(bien.get('prix'), (int, float)) and bien['prix'] <= 0:
             print(f"⚠️  Bien {i+1} : prix invalide ({bien['prix']})")
             erreurs += 1

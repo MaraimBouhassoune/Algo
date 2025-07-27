@@ -25,7 +25,7 @@ from datetime import datetime
 import os
 
 
-# Configuration des tests
+
 CSV_FILE = "transactions_immobilieres.csv"
 TAILLES_TEST = [100, 500, 1000]
 CRITERES_TRI = [("prix", "PRIX"), ("surface", "SURFACE")]
@@ -49,22 +49,22 @@ def executer_tests_tri(biens_base, taille, critere_key, critere_nom):
     for algo_func, algo_nom in ALGORITHMES_TRI:
         try:
             if algo_nom == "FUSION":
-                # Tri fusion retourne (liste, comparaisons, temps)
+              
                 trie, comparaisons, temps = algo_func(echantillon, critere_key)
-                operations = 0  # Pas d'échanges/décalages comptés séparément
+                operations = 0  
                 type_ops = ""
             else:
-                # Autres tris retournent (liste, comparaisons, opérations, temps)
+             
                 trie, comparaisons, operations, temps = algo_func(echantillon, critere_key)
                 type_ops = "décalages" if algo_nom == "INSERTION" else "échanges"
             
-            # Validation du tri
+         
             valide, msg = valider_tri(echantillon, trie, critere_key)
             if not valide:
                 print(f"❌ ERREUR - {algo_nom}: {msg}")
                 continue
             
-            # Affichage des résultats
+         
             if type_ops:
                 print(f"Tri {algo_nom:<10} : {temps:>8.6f}s | {comparaisons:>6} comparaisons | {operations:>6} {type_ops}")
             else:
@@ -97,10 +97,10 @@ def executer_tests_recherche(biens_base, taille):
     print(f"\n--- Tests de recherche sur {taille} éléments ---")
     
     try:
-        # Préparation : tri par prix pour la recherche binaire
+        
         biens_tries_prix, _, _ = tri_fusion(echantillon, "prix")
         
-        # Test 1: Recherche linéaire - Maisons à Paris
+        
         nb_maisons, comp_maisons, temps_maisons = recherche_lineaire(
             echantillon,
             lambda x: x.get("type_local") == "Maison" and x.get("commune") == "PARIS"
@@ -116,7 +116,7 @@ def executer_tests_recherche(biens_base, taille):
             'resultats': nb_maisons
         })
         
-        # Test 2: Recherche binaire - Prix 350000€
+        
         pos_prix, comp_prix, temps_prix = recherche_binaire(biens_tries_prix, 350000, "prix")
         print(f"Recherche binaire 350000€ ({taille:>4})        : {temps_prix:>8.6f}s | {comp_prix:>4} cmp | pos {pos_prix}")
         
@@ -129,7 +129,7 @@ def executer_tests_recherche(biens_base, taille):
             'resultats': pos_prix
         })
         
-        # Test 3: Min/Max - Prix au m²
+        
         min_prix_m2, max_prix_m2, comp_minmax, temps_minmax = recherche_min_max(echantillon, "prix_m2")
         print(f"Min/Max PRIX_M2 ({taille:>4})               : {temps_minmax:>8.6f}s | {comp_minmax:>4} cmp | {min_prix_m2:.0f} – {max_prix_m2:.0f} €/m²")
         
@@ -142,7 +142,7 @@ def executer_tests_recherche(biens_base, taille):
             'resultats': f"{min_prix_m2:.0f}-{max_prix_m2:.0f}"
         })
         
-        # Test 4: Recherche linéaire - Appartements 3 pièces
+       
         nb_appart3p, comp_appart3p, temps_appart3p = recherche_lineaire(
             echantillon,
             lambda x: x.get("type_local") == "Appartement" and str(x.get("nb_pieces")) == "3"
@@ -170,7 +170,7 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
     """
     rapport = []
     
-    # En-tête
+    
     rapport.append("=" * 80)
     rapport.append("RAPPORT D'ANALYSE DE PERFORMANCE - ALGORITHMES TRI & RECHERCHE")
     rapport.append("=" * 80)
@@ -178,12 +178,12 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
     rapport.append(f"Dataset : {len(biens_originaux)} biens immobiliers")
     rapport.append("")
     
-    # Analyse des algorithmes de tri
+   
     rapport.append("PARTIE 1 : ANALYSE DES ALGORITHMES DE TRI")
     rapport.append("-" * 50)
     rapport.append("")
     
-    # Groupement des résultats par taille et critère
+    
     for taille in TAILLES_TEST:
         for critere_key, critere_nom in CRITERES_TRI:
             rapport.append(f"=== {critere_nom} - {taille} éléments ===")
@@ -192,7 +192,7 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
                                if r['taille'] == taille and r['critere'] == critere_nom]
             
             if resultats_filtrés:
-                # Tri par temps pour le classement
+                
                 resultats_filtrés.sort(key=lambda x: x['temps'])
                 
                 for i, r in enumerate(resultats_filtrés, 1):
@@ -204,7 +204,7 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
                         rapport.append(f"{i}. {r['algorithme']:<10} : {temps_ms:>7.2f}ms | "
                                      f"{r['comparaisons']:>6} comp")
                 
-                # Analyse comparative
+                
                 plus_rapide = resultats_filtrés[0]
                 plus_lent = resultats_filtrés[-1]
                 facteur = plus_lent['temps'] / plus_rapide['temps'] if plus_rapide['temps'] > 0 else 0
@@ -214,17 +214,17 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
                 rapport.append(f"→ Facteur     : ×{facteur:.1f}")
                 rapport.append("")
     
-    # Analyse des complexités théoriques vs pratiques
+   
     rapport.append("ANALYSE DES COMPLEXITÉS")
     rapport.append("-" * 30)
     rapport.append("")
     
-    # Recherche des tendances pour 1000 éléments
+   
     resultats_1000 = [r for r in resultats_tri if r['taille'] == 1000]
     if resultats_1000:
         rapport.append("Performance sur 1000 éléments (moyenne prix + surface) :")
         
-        # Calcul des moyennes par algorithme
+      
         moyennes = {}
         for r in resultats_1000:
             algo = r['algorithme']
@@ -240,7 +240,7 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
         
         rapport.append("")
     
-    # Analyse des algorithmes de recherche
+   
     rapport.append("PARTIE 2 : ANALYSE DES ALGORITHMES DE RECHERCHE")
     rapport.append("-" * 55)
     rapport.append("")
@@ -255,7 +255,7 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
             rapport.append(f"{r['type']:<20} ({r['cible']:<15}) : {temps_ms:>6.2f}ms | "
                          f"{r['comparaisons']:>4} comp | {r['resultats']}")
         
-        # Analyse de l'efficacité de la recherche binaire
+        
         lineaire = next((r for r in resultats_rech_taille 
                         if r['type'] == 'Recherche linéaire' and '350000' not in r['cible']), None)
         binaire = next((r for r in resultats_rech_taille 
@@ -268,7 +268,7 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
         
         rapport.append("")
     
-    # Conclusions et recommandations
+    
     rapport.append("PARTIE 3 : CONCLUSIONS ET RECOMMANDATIONS")
     rapport.append("-" * 45)
     rapport.append("")
@@ -287,17 +287,17 @@ def generer_rapport_complet(resultats_tri, resultats_recherche, biens_originaux)
     rapport.append("• Application réelle                   : Index de base de données")
     rapport.append("")
     
-    # Observations spécifiques
+    
     rapport.append("OBSERVATIONS SPÉCIFIQUES :")
     rapport.append(f"• Dataset contient {len(biens_originaux)} transactions immobilières")
     
-    # Analyse de la répartition des prix
+     
     prix_valides = [b['prix'] for b in biens_originaux if isinstance(b.get('prix'), (int, float))]
     if prix_valides:
         prix_min, prix_max = min(prix_valides), max(prix_valides)
         rapport.append(f"• Prix : {prix_min:,}€ → {prix_max:,}€ (étendue: {prix_max-prix_min:,}€)")
     
-    # Analyse des types de biens
+    
     types_biens = {}
     for bien in biens_originaux:
         type_bien = bien.get('type_local', 'Inconnu')
@@ -324,13 +324,13 @@ def main():
     print("=" * 60)
     print(f"Fichier source : {CSV_FILE}")
     
-    # Vérification de l'existence du fichier
+    
     if not os.path.exists(CSV_FILE):
         print(f"❌ ERREUR : Le fichier {CSV_FILE} n'existe pas !")
         print("   Veuillez vous assurer que le fichier CSV est dans le même dossier.")
         return
     
-    # Chargement des données
+ 
     print("\n📂 CHARGEMENT DES DONNÉES")
     print("-" * 30)
     biens_complets = lire_csv_biens(CSV_FILE)
@@ -339,19 +339,19 @@ def main():
         print("❌ Aucune donnée chargée ! Vérifiez le fichier CSV.")
         return
     
-    # Affichage des statistiques
+     
     afficher_statistiques_dataset(biens_complets)
     
-    # Validation des données
+ 
     if not valider_donnees(biens_complets):
         print("⚠️  Des erreurs ont été détectées, mais les tests continuent...")
     
-    # Stockage des résultats
+     
     tous_resultats_tri = []
     tous_resultats_recherche = []
     logs_execution = []
     
-    # PHASE 1 : Tests des algorithmes de tri
+     
     print("\n🔄 PHASE 1 : TESTS DES ALGORITHMES DE TRI")
     print("=" * 50)
     
@@ -360,7 +360,7 @@ def main():
             resultats = executer_tests_tri(biens_complets, taille, critere_key, critere_nom)
             tous_resultats_tri.extend(resultats)
     
-    # PHASE 2 : Tests des algorithmes de recherche  
+    
     print("\n🔍 PHASE 2 : TESTS DES ALGORITHMES DE RECHERCHE")
     print("=" * 50)
     
@@ -368,18 +368,18 @@ def main():
         resultats = executer_tests_recherche(biens_complets, taille)
         tous_resultats_recherche.extend(resultats)
     
-    # PHASE 3 : Génération des rapports
+ 
     print("\n📊 PHASE 3 : GÉNÉRATION DES RAPPORTS")
     print("=" * 40)
     
-    # Génération du fichier de résultats bruts (compatible avec l'ancien format)
+     
     try:
         with open("resultats.txt", "w", encoding="utf-8") as f:
             f.write("=== RÉSULTATS COMPLETS : TRIS & RECHERCHES ===\n\n")
             f.write("🚀 TESTS DES ALGORITHMES DE TRI\n")
             f.write("=" * 50 + "\n\n")
             
-            # Reproduction du format original pour la compatibilité
+             
             for taille in TAILLES_TEST:
                 for critere_key, critere_nom in CRITERES_TRI:
                     f.write(f"=== TRI PAR {critere_nom} ({taille} éléments) ===\n")
@@ -422,7 +422,7 @@ def main():
     except Exception as e:
         print(f"❌ ERREUR lors de la génération de resultats.txt : {e}")
     
-    # Génération du rapport d'analyse complet
+     
     try:
         rapport_complet = generer_rapport_complet(tous_resultats_tri, tous_resultats_recherche, biens_complets)
         
@@ -434,7 +434,7 @@ def main():
     except Exception as e:
         print(f"❌ ERREUR lors de la génération du rapport : {e}")
     
-    # Résumé final
+    
     print(f"\n🎯 RÉSUMÉ FINAL")
     print(f"   • {len(tous_resultats_tri)} tests de tri effectués")
     print(f"   • {len(tous_resultats_recherche)} tests de recherche effectués")

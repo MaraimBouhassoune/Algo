@@ -37,20 +37,20 @@ def tri_selection(lst, key):
         return [], 0, 0, 0.0
     
     t0 = _now()
-    tab = lst.copy()  # Copie pour ne pas modifier l'original
+    tab = lst.copy()  
     n = len(tab)
     comp = exch = 0
 
     for i in range(n - 1):
         min_idx = i
         
-        # Recherche du minimum dans la partie non triée
+        
         for j in range(i + 1, n):
             comp += 1
             if _get_numeric_value(tab[j], key) < _get_numeric_value(tab[min_idx], key):
                 min_idx = j
         
-        # Échange si nécessaire
+         
         if min_idx != i:
             tab[i], tab[min_idx] = tab[min_idx], tab[i]
             exch += 1
@@ -76,9 +76,9 @@ def tri_insertion(lst, key):
         pivot_val = _get_numeric_value(pivot, key)
         j = i - 1
         
-        # Décalage des éléments plus grands vers la droite
+         
         while j >= 0:
-            comp += 1  # Comparaison effectuée
+            comp += 1   
             if _get_numeric_value(tab[j], key) > pivot_val:
                 tab[j + 1] = tab[j]
                 shift += 1
@@ -86,8 +86,8 @@ def tri_insertion(lst, key):
             else:
                 break
         
-        # Insertion du pivot à sa position finale
-        if j + 1 != i:  # Si le pivot n'est pas déjà à sa place
+        
+        if j + 1 != i:   
             tab[j + 1] = pivot
             shift += 1
     
@@ -104,14 +104,14 @@ def tri_fusion(lst, key):
         return [], 0, 0.0
     
     t0 = _now()
-    comp = [0]  # Utilisation d'une liste pour modifier dans les fonctions imbriquées
+    comp = [0]  
 
     def _merge(gauche, droite):
         """Fusionne deux listes triées."""
         resultat = []
         i = j = 0
         
-        # Fusion en comparant les éléments
+       
         while i < len(gauche) and j < len(droite):
             comp[0] += 1
             if _get_numeric_value(gauche[i], key) <= _get_numeric_value(droite[j], key):
@@ -121,7 +121,7 @@ def tri_fusion(lst, key):
                 resultat.append(droite[j])
                 j += 1
         
-        # Ajout des éléments restants
+        
         resultat.extend(gauche[i:])
         resultat.extend(droite[j:])
         return resultat
@@ -131,12 +131,12 @@ def tri_fusion(lst, key):
         if len(tab) <= 1:
             return tab
         
-        # Division
+      
         milieu = len(tab) // 2
         gauche = _tri_fusion_recursif(tab[:milieu])
         droite = _tri_fusion_recursif(tab[milieu:])
         
-        # Fusion
+        
         return _merge(gauche, droite)
 
     resultat = _tri_fusion_recursif(lst.copy())
@@ -162,16 +162,16 @@ def tri_rapide(lst, key):
         Partitionne le tableau autour d'un pivot aléatoire.
         Retourne l'index final du pivot.
         """
-        # Choix d'un pivot aléatoire et placement à la fin
+         
         pivot_idx = randint(bas, haut)
         if pivot_idx != haut:
             tab[pivot_idx], tab[haut] = tab[haut], tab[pivot_idx]
             exch[0] += 1
 
         pivot_val = _get_numeric_value(tab[haut], key)
-        i = bas - 1  # Index du dernier élément <= pivot
+        i = bas - 1   
 
-        # Partition : éléments <= pivot à gauche, > pivot à droite
+        
         for j in range(bas, haut):
             comp[0] += 1
             if _get_numeric_value(tab[j], key) <= pivot_val:
@@ -180,7 +180,7 @@ def tri_rapide(lst, key):
                     tab[i], tab[j] = tab[j], tab[i]
                     exch[0] += 1
 
-        # Placement du pivot à sa position finale
+        
         if i + 1 != haut:
             tab[i + 1], tab[haut] = tab[haut], tab[i + 1]
             exch[0] += 1
@@ -190,14 +190,14 @@ def tri_rapide(lst, key):
     def _tri_rapide_recursif(bas, haut):
         """Fonction récursive de tri rapide."""
         if bas < haut:
-            # Partitionnement
+            
             pivot_pos = _partition(bas, haut)
             
-            # Tri récursif des sous-parties
+            
             _tri_rapide_recursif(bas, pivot_pos - 1)
             _tri_rapide_recursif(pivot_pos + 1, haut)
 
-    # Lancement du tri
+    
     if len(tab) > 1:
         _tri_rapide_recursif(0, len(tab) - 1)
     
@@ -213,14 +213,14 @@ def valider_tri(original, trie, key):
     if len(original) != len(trie):
         return False, "Tailles différentes"
     
-    # Vérification de l'ordre
+    
     for i in range(len(trie) - 1):
         val_courante = _get_numeric_value(trie[i], key)
         val_suivante = _get_numeric_value(trie[i + 1], key)
         if val_courante > val_suivante:
             return False, f"Ordre incorrect à l'index {i}"
     
-    # Vérification que tous les éléments sont présents (tri des IDs pour comparaison)
+   
     ids_original = sorted([id(item) for item in original])
     ids_trie = sorted([id(item) for item in trie])
     
@@ -259,7 +259,7 @@ def comparer_algorithmes_tri(biens, key, taille_echantillon=None):
             print(f"{nom:<15} : {temps:>8.4f}s | {comp:>6} comparaisons | {ops:>6} {ops_nom}")
             resultats.append((nom, temps, comp, ops))
         
-        # Validation
+        
         valide, msg = valider_tri(biens, trie, key)
         if not valide:
             print(f"❌ ERREUR dans {nom}: {msg}")

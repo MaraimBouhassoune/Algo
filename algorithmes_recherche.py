@@ -43,7 +43,7 @@ def recherche_lineaire(table, predicate):
     t0 = _now()
     
     for elt in table:
-        comp += 1  # Une comparaison par élément testé
+        comp += 1  
         if predicate(elt):
             found += 1
     
@@ -102,7 +102,7 @@ def recherche_binaire(sorted_table, cible, key):
         milieu = (gauche + droite) // 2
         val_milieu = _get_numeric_value(sorted_table[milieu], key)
         
-        comp += 1  # Une comparaison par itération
+        comp += 1   
         
         if val_milieu == cible:
             return milieu, comp, _now() - t0
@@ -136,21 +136,21 @@ def recherche_min_max(table, key):
     
     t0 = _now()
     
-    # Initialisation avec le premier élément
+    
     val_init = _get_numeric_value(table[0], key)
     val_min = val_max = val_init
     comp = 0
     
-    # Parcours du reste des éléments
+   
     for elt in table[1:]:
         val_courante = _get_numeric_value(elt, key)
         
-        # Comparaison pour le minimum
+       
         comp += 1
         if val_courante < val_min:
             val_min = val_courante
         
-        # Comparaison pour le maximum
+      
         comp += 1
         if val_courante > val_max:
             val_max = val_courante
@@ -209,7 +209,7 @@ def recherche_dans_plage(table, key, min_val, max_val):
     
     for elt in table:
         val = _get_numeric_value(elt, key)
-        comp += 2  # Deux comparaisons : >= min_val et <= max_val
+        comp += 2   
         if min_val <= val <= max_val:
             resultats.append(elt)
     
@@ -224,22 +224,22 @@ def comparer_recherches(biens, biens_tries_prix):
     print(f"\n🔍 COMPARAISON DES RECHERCHES sur {len(biens)} éléments")
     print("=" * 70)
     
-    # 1. Recherche linéaire : maisons à Paris
+     
     nb, comp, temps = recherche_lineaire(
         biens, 
         lambda x: x.get("type_local") == "Maison" and x.get("commune") == "PARIS"
     )
     print(f"Recherche linéaire (maisons Paris)  : {temps:.6f}s | {comp:>4} comp | {nb:>2} trouvées")
     
-    # 2. Recherche binaire : prix spécifique
+    
     pos, comp, temps = recherche_binaire(biens_tries_prix, 350000, "prix")
     print(f"Recherche binaire (350000€)         : {temps:.6f}s | {comp:>4} comp | pos {pos}")
     
-    # 3. Min/Max : prix au m²
+     
     min_val, max_val, comp, temps = recherche_min_max(biens, "prix_m2")
     print(f"Min/Max prix/m²                     : {temps:.6f}s | {comp:>4} comp | {min_val:.0f}-{max_val:.0f}€/m²")
     
-    # 4. Recherche linéaire : appartements 3 pièces
+  
     nb, comp, temps = recherche_lineaire(
         biens,
         lambda x: x.get("type_local") == "Appartement" and str(x.get("nb_pieces")) == "3"
@@ -276,7 +276,7 @@ def analyser_repartition(biens, key):
     valeurs = []
     for bien in biens:
         val = _get_numeric_value(bien, key)
-        if val > 0:  # Ignorer les valeurs invalides
+        if val > 0:   
             valeurs.append(val)
     
     if not valeurs:
@@ -293,12 +293,12 @@ def analyser_repartition(biens, key):
     print(f"   • Médiane : {valeurs[n//2]:,.0f}")
     print(f"   • Étendue : {valeurs[-1] - valeurs[0]:,.0f}")
     
-    # Calcul des quartiles
+     
     q1 = valeurs[n//4]
     q3 = valeurs[3*n//4]
     print(f"   • Q1 : {q1:,.0f}")
     print(f"   • Q3 : {q3:,.0f}")
     
-    # Nombre de valeurs uniques
+    
     valeurs_uniques = len(set(valeurs))
     print(f"   • Valeurs uniques : {valeurs_uniques} ({100*valeurs_uniques/n:.1f}%)")
