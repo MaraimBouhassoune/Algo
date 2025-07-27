@@ -1,0 +1,121 @@
+================================================================================
+RAPPORT D'ANALYSE DE PERFORMANCE - ALGORITHMES TRI & RECHERCHE
+================================================================================
+Généré le : 27/07/2025 à 15:32:59
+Dataset : 999 biens immobiliers
+
+PARTIE 1 : ANALYSE DES ALGORITHMES DE TRI
+--------------------------------------------------
+
+=== PRIX - 100 éléments ===
+1. FUSION     :    0.38ms |    549 comp
+2. RAPIDE     :    0.49ms |    829 comp |    364 échanges
+3. INSERTION  :    0.65ms |   2495 comp |   2493 décalages
+4. SÉLECTION  :    1.80ms |   4950 comp |     95 échanges
+→ Plus rapide : FUSION (0.38ms)
+→ Plus lent   : SÉLECTION (1.80ms)
+→ Facteur     : ×4.8
+
+=== SURFACE - 100 éléments ===
+1. RAPIDE     :    0.28ms |    724 comp |    342 échanges
+2. FUSION     :    0.35ms |    541 comp
+3. INSERTION  :    0.59ms |   1955 comp |   1946 décalages
+4. SÉLECTION  :    2.14ms |   4950 comp |     97 échanges
+→ Plus rapide : RAPIDE (0.28ms)
+→ Plus lent   : SÉLECTION (2.14ms)
+→ Facteur     : ×7.5
+
+=== PRIX - 500 éléments ===
+1. RAPIDE     :    1.65ms |   4616 comp |   2065 échanges
+2. FUSION     :    3.17ms |   3866 comp
+3. INSERTION  :   20.95ms |  67224 comp |  67220 décalages
+4. SÉLECTION  :   51.91ms | 124750 comp |    495 échanges
+→ Plus rapide : RAPIDE (1.65ms)
+→ Plus lent   : SÉLECTION (51.91ms)
+→ Facteur     : ×31.4
+
+=== SURFACE - 500 éléments ===
+1. FUSION     :    2.65ms |   3833 comp
+2. RAPIDE     :    3.41ms |   7630 comp |   2422 échanges
+3. INSERTION  :   19.76ms |  61136 comp |  61124 décalages
+4. SÉLECTION  :   53.66ms | 124750 comp |    488 échanges
+→ Plus rapide : FUSION (2.65ms)
+→ Plus lent   : SÉLECTION (53.66ms)
+→ Facteur     : ×20.2
+
+=== PRIX - 1000 éléments ===
+1. RAPIDE     :    4.66ms |  12206 comp |   4838 échanges
+2. FUSION     :    5.34ms |   8696 comp
+3. INSERTION  :   73.49ms | 252919 comp | 252915 décalages
+4. SÉLECTION  :  196.81ms | 498501 comp |    993 échanges
+→ Plus rapide : RAPIDE (4.66ms)
+→ Plus lent   : SÉLECTION (196.81ms)
+→ Facteur     : ×42.2
+
+=== SURFACE - 1000 éléments ===
+1. FUSION     :    5.08ms |   8686 comp
+2. RAPIDE     :    8.99ms |  20798 comp |   4870 échanges
+3. INSERTION  :   77.56ms | 241162 comp | 241148 décalages
+4. SÉLECTION  :  199.85ms | 498501 comp |    988 échanges
+→ Plus rapide : FUSION (5.08ms)
+→ Plus lent   : SÉLECTION (199.85ms)
+→ Facteur     : ×39.3
+
+ANALYSE DES COMPLEXITÉS
+------------------------------
+
+Performance sur 1000 éléments (moyenne prix + surface) :
+• SÉLECTION  :  198.3ms |  498501 comparaisons
+• INSERTION  :   75.5ms |  247040 comparaisons
+• FUSION     :    5.2ms |    8691 comparaisons
+• RAPIDE     :    6.8ms |   16502 comparaisons
+
+PARTIE 2 : ANALYSE DES ALGORITHMES DE RECHERCHE
+-------------------------------------------------------
+
+=== 100 éléments ===
+Recherche linéaire   (Maisons Paris  ) :   0.04ms |  100 comp | 5
+Recherche binaire    (350000€        ) :   0.04ms |    6 comp | 50
+Min/Max              (Prix/m²        ) :   0.07ms |  198 comp | 1312-11702
+Recherche linéaire   (Appartements 3P) :   0.21ms |  100 comp | 27
+→ Gain recherche binaire : ×17 (comparaisons)
+
+=== 500 éléments ===
+Recherche linéaire   (Maisons Paris  ) :   0.07ms |  500 comp | 10
+Recherche binaire    (350000€        ) :   0.01ms |    5 comp | 295
+Min/Max              (Prix/m²        ) :   0.12ms |  998 comp | 985-12777
+Recherche linéaire   (Appartements 3P) :   0.15ms |  500 comp | 60
+→ Gain recherche binaire : ×100 (comparaisons)
+
+=== 1000 éléments ===
+Recherche linéaire   (Maisons Paris  ) :   0.36ms |  999 comp | 17
+Recherche binaire    (350000€        ) :   0.01ms |    7 comp | 600
+Min/Max              (Prix/m²        ) :   1.73ms | 1996 comp | 985-13785
+Recherche linéaire   (Appartements 3P) :   0.90ms |  999 comp | 91
+→ Gain recherche binaire : ×143 (comparaisons)
+
+PARTIE 3 : CONCLUSIONS ET RECOMMANDATIONS
+---------------------------------------------
+
+RECOMMANDATIONS POUR LES TRIS :
+• Petits datasets (< 100) : Tri insertion (simple et efficace)
+• Datasets moyens/grands   : Tri fusion (O(n log n) garanti, stable)
+• Performance pure         : Tri rapide (en moyenne le plus rapide)
+• Stabilité requise        : Tri fusion (préserve l'ordre des égaux)
+
+RECOMMANDATIONS POUR LES RECHERCHES :
+• Recherche unique sur données triées : Recherche binaire
+• Recherche multiple/filtrée          : Recherche linéaire
+• Statistiques (min/max)               : Un seul parcours optimisé
+• Application réelle                   : Index de base de données
+
+OBSERVATIONS SPÉCIFIQUES :
+• Dataset contient 999 transactions immobilières
+• Prix : 50,000€ → 2,150,000€ (étendue: 2,100,000€)
+• Répartition par type :
+  - Appartement : 507 (50.8%)
+  - Maison : 492 (49.2%)
+
+================================================================================
+FIN DU RAPPORT
+================================================================================

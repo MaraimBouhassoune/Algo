@@ -1,97 +1,165 @@
-# Projet : Analyse de Performance d'Algorithmes
-## Tri et Recherche - Mesure et Comparaison
+# PROJET ALGORITHMIE - ANALYSE DE PERFORMANCE
 
-### 📋 Description du projet
-Ce projet implémente et compare les performances de 7 algorithmes sur des données réelles d'immobilier :
-- **4 algorithmes de tri** : sélection, insertion, fusion, rapide
-- **3 algorithmes de recherche** : linéaire, binaire, min/max
+## 📋 Description
 
-### 🏗️ Structure du projet
+Ce projet implémente **from scratch** et compare les performances de 7 algorithmes fondamentaux sur des données réelles d'immobilier :
+
+### 🔄 Algorithmes de tri (4)
+- **Tri par sélection** : O(n²) - Simple et prévisible
+- **Tri par insertion** : O(n²) - Efficace sur petites données
+- **Tri fusion** : O(n log n) - Stable et optimal
+- **Tri rapide** : O(n log n) moyenne - Rapide en pratique
+
+### 🔍 Algorithmes de recherche (3)  
+- **Recherche linéaire** : O(n) - Universelle
+- **Recherche binaire** : O(log n) - Sur données triées
+- **Recherche Min/Max** : O(n) - Optimisée en un parcours
+
+## 🎯 Objectifs pédagogiques
+
+1. **Implémenter** les algorithmes sans bibliothèques externes
+2. **Mesurer** précisément temps d'exécution et nombre d'opérations
+3. **Comparer** théorie vs pratique sur données réelles
+4. **Analyser** les résultats et formuler des recommandations
+
+## 📁 Structure du projet
+
 ```
-Algo/
-├── main.py                          # Programme principal (tris + recherches)
-├── algorithmes_tri.py               # 4 algorithmes de tri
-├── algorithmes_recherche.py         # 3 algorithmes de recherche
-├── utilitaires.py                   # Lecture du CSV sans bibliothèque
-├── test_recherche.py                # Tests isolés des recherches
-├── transactions_immobilieres.csv    # Données d'immobilier
-├── resultats.txt                    # Résultats des tests
-├── analyse.txt                      # Analyse des résultats
-└── README.md                        # Documentation
+projet-algorithmie/
+│
+├── 📄 transactions_immobilieres.csv  # Dataset (fourni)
+├── 🐍 utilitaires.py                 # Lecture CSV from scratch
+├── 🔄 algorithmes_tri.py             # 4 algorithmes de tri
+├── 🔍 algorithmes_recherche.py       # 3 algorithmes de recherche
+├── 🚀 main.py                        # Exécution des tests
+├── 🧪 test_validation.py             # Tests de validation
+├── 📊 resultats.txt                  # Résultats bruts (généré)
+├── 📈 analyse_complete.txt           # Rapport d'analyse (généré)
+└── 📖 README.md                      # Ce fichier
 ```
 
-### 🚀 Comment lancer le projet
+## 🚀 Utilisation
 
-#### Option 1 : Tests complets (recommandé)
+### Prérequis
+- Python 3.6+ (aucune bibliothèque externe)
+- Fichier `transactions_immobilieres.csv` dans le même dossier
+
+### Exécution principale
 ```bash
 python main.py
 ```
-Lance tous les tests :
-- **Tris** : 4 algorithmes × 2 critères × 3 tailles = 24 tests
-- **Recherches** : 4 types × 3 tailles = 12 tests
 
-#### Option 2 : Tests de recherche uniquement
+Cette commande :
+1. ✅ Charge et valide les données CSV
+2. 🔄 Teste les 4 tris sur 2 critères × 3 tailles (24 tests)
+3. 🔍 Teste les 3 recherches sur 3 tailles (12 tests) 
+4. 📊 Génère `resultats.txt` et `analyse_complete.txt`
+
+### Tests de validation
+```bash
+python test_validation.py
+```
+
+Valide automatiquement :
+- ✅ Implémentation correcte des algorithmes
+- ✅ Comptage précis des opérations
+- ✅ Conformité au cahier des charges
+
+### Tests sur données fictives
 ```bash
 python test_recherche.py
 ```
-Lance les tests de recherche sur un mini-tableau fictif (10 biens).
 
-### 📊 Résultats obtenus
+Teste rapidement sur un petit échantillon de 10 biens.
 
-#### Algorithmes de Tri
-- **Tri Fusion** : Le plus rapide (O(n log n))
-- **Tri Rapide** : Très efficace mais moins stable
-- **Tri Insertion** : Moyennement efficace (O(n²))
-- **Tri Sélection** : Le plus lent (O(n²))
+## 📊 Types de tests effectués
 
-#### Algorithmes de Recherche
-- **Recherche Binaire** : Très rapide (O(log n)) - 6-7 comparaisons sur 100-1000 éléments
-- **Recherche Linéaire** : Linéaire (O(n)) - 100-999 comparaisons
-- **Recherche Min/Max** : Efficace en un seul parcours
+### Tests de tri
+- **Tailles** : 100, 500, 1000 éléments
+- **Critères** : Prix et Surface
+- **Mesures** : Temps, comparaisons, échanges/décalages
 
-### 🔍 Tests de recherche effectués
+### Tests de recherche
+- **Recherche linéaire** : Maisons à Paris, Appartements 3 pièces
+- **Recherche binaire** : Prix exact (350000€)
+- **Min/Max** : Prix au m² minimum et maximum
 
-#### Sur 100 éléments :
-- Maisons à Paris : 5 trouvées
-- Prix exact 350000€ : Position 50 (recherche binaire)
-- Prix au m² : Min 1312€/m², Max 11702€/m²
-- Appartements 3 pièces : 27 trouvés
+## 📈 Résultats générés
 
-#### Sur 500 éléments :
-- Maisons à Paris : 10 trouvées
-- Prix exact 350000€ : Position 295 (recherche binaire)
-- Prix au m² : Min 985€/m², Max 12777€/m²
-- Appartements 3 pièces : 60 trouvés
+### `resultats.txt`
+Format brut compatible avec les spécifications :
+```
+=== TRI PAR PRIX (1000 éléments) ===  
+Tri SÉLECTION : 0.165648s | 498501 comparaisons | 993 échanges
+Tri INSERTION : 0.105827s | 252923 comparaisons | 252915 décalages
+Tri FUSION : 0.004948s | 8696 comparaisons
+Tri RAPIDE : 0.005510s | 12806 comparaisons | 4921 échanges
+```
 
-#### Sur 1000 éléments :
-- Maisons à Paris : 17 trouvées
-- Prix exact 350000€ : Position 600 (recherche binaire)
-- Prix au m² : Min 985€/m², Max 13785€/m²
-- Appartements 3 pièces : 91 trouvés
+### `analyse_complete.txt`
+Rapport détaillé avec :
+- 📊 Classements par performance
+- 🔍 Analyses comparatives 
+- 💡 Recommandations d'usage
+- 📈 Observations théorie vs pratique
 
-### 📈 Observations importantes
+## 🛠️ Implémentation technique
 
-1. **Complexité algorithmique** : Les différences entre O(n²) et O(n log n) sont spectaculaires sur de gros volumes
-2. **Recherche binaire** : 100x plus rapide que la recherche linéaire
-3. **Stabilité** : Le tri fusion est plus stable que le tri rapide
-4. **Données réelles** : Les performances varient selon la distribution des données
-5. **Progression cohérente** : Les résultats évoluent logiquement avec la taille des données
+### Lecture CSV robuste
+```python
+def lire_csv_biens(path, n_max=None):
+    # Gestion des virgules dans les données
+    # Conversion automatique des types
+    # Validation de l'intégrité
+```
 
-### 🛠️ Technologies utilisées
-- **Python** (sans bibliothèques externes)
-- **Lecture CSV** manuelle (sans pandas/csv)
-- **Mesure de temps** avec `time.time()`
-- **Comptage manuel** des opérations
+### Comptage précis des opérations
+- **Comparaisons** : Chaque test de condition
+- **Échanges** : Chaque permutation d'éléments
+- **Décalages** : Chaque déplacement en insertion
 
-### 📝 Analyse complète
-Consultez `analyse.txt` pour les réponses détaillées aux 10 questions d'analyse du projet.
+### Mesure temporelle haute précision
+```python
+from time import perf_counter
+t0 = perf_counter()
+# ... algorithme ...
+temps = perf_counter() - t0
+```
 
-### ✅ Validation
-Le projet respecte toutes les contraintes :
-- ✅ Implémentation FROM SCRATCH
-- ✅ Pas de bibliothèques externes (csv, pandas, numpy)
-- ✅ Comptage manuel des opérations
-- ✅ Tests sur 3 tailles (100, 500, 1000)
-- ✅ Format d'affichage respecté
-- ✅ Sauvegarde dans resultats.txt
-- ✅ Analyse complète dans analyse.txt
+## 🎯 Conformité cahier des charges
+
+✅ **4 algorithmes de tri** implémentés from scratch  
+✅ **3 algorithmes de recherche** implémentés from scratch  
+✅ **Tests sur 3 tailles** : 100, 500, 1000 éléments  
+✅ **Mesure temps + opérations** pour chaque algorithme  
+✅ **Lecture CSV** sans bibliothèque externe  
+✅ **Analyse comparative** des résultats  
+✅ **Rapport détaillé** des observations  
+
+## 🔧 Personnalisation
+
+### Modifier les tailles de test
+```python
+# Dans main.py
+TAILLES_TEST = [50, 200, 1500]  # Nouvelles tailles
+```
+
+### Ajouter des critères de tri
+```python  
+# Dans main.py
+CRITERES_TRI = [
+    ("prix", "PRIX"),
+    ("surface", "SURFACE"), 
+    ("prix_m2", "PRIX_M2")  # Nouveau critère
+]
+```
+
+### Tests sur d'autres recherches
+```python
+# Dans algorithmes_recherche.py
+nb, comp, temps = recherche_lineaire(
+    biens,
+    lambda x: x["commune"] == "MARSEILLE"  # Nouvelle condition
+)
+```
+

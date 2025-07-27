@@ -4,60 +4,60 @@
 ==================================================
 
 === TRI PAR PRIX (100 éléments) ===
-Tri SÉLECTION : 0.001554s | 4950 comparaisons | 95 échanges
-Tri INSERTION : 0.000939s | 2499 comparaisons | 2493 décalages
-Tri FUSION : 0.000341s | 549 comparaisons
-Tri RAPIDE : 0.000288s | 775 comparaisons | 361 échanges
+Tri SÉLECTION : 0.001803s | 4950 comparaisons | 95 échanges
+Tri INSERTION : 0.000645s | 2495 comparaisons | 2493 décalages
+Tri FUSION : 0.000375s | 549 comparaisons
+Tri RAPIDE : 0.000490s | 829 comparaisons | 364 échanges
 
 === TRI PAR SURFACE (100 éléments) ===
-Tri SÉLECTION : 0.001461s | 4950 comparaisons | 97 échanges
-Tri INSERTION : 0.000725s | 1957 comparaisons | 1946 décalages
-Tri FUSION : 0.000327s | 541 comparaisons
-Tri RAPIDE : 0.000313s | 731 comparaisons | 252 échanges
+Tri SÉLECTION : 0.002140s | 4950 comparaisons | 97 échanges
+Tri INSERTION : 0.000587s | 1955 comparaisons | 1946 décalages
+Tri FUSION : 0.000351s | 541 comparaisons
+Tri RAPIDE : 0.000284s | 724 comparaisons | 342 échanges
 
 === TRI PAR PRIX (500 éléments) ===
-Tri SÉLECTION : 0.043737s | 124750 comparaisons | 495 échanges
-Tri INSERTION : 0.029361s | 67228 comparaisons | 67220 décalages
-Tri FUSION : 0.003795s | 3866 comparaisons
-Tri RAPIDE : 0.001818s | 4784 comparaisons | 2050 échanges
+Tri SÉLECTION : 0.051910s | 124750 comparaisons | 495 échanges
+Tri INSERTION : 0.020948s | 67224 comparaisons | 67220 décalages
+Tri FUSION : 0.003168s | 3866 comparaisons
+Tri RAPIDE : 0.001651s | 4616 comparaisons | 2065 échanges
 
 === TRI PAR SURFACE (500 éléments) ===
-Tri SÉLECTION : 0.041030s | 124750 comparaisons | 488 échanges
-Tri INSERTION : 0.026058s | 61138 comparaisons | 61124 décalages
-Tri FUSION : 0.002036s | 3833 comparaisons
-Tri RAPIDE : 0.002246s | 7093 comparaisons | 1943 échanges
+Tri SÉLECTION : 0.053662s | 124750 comparaisons | 488 échanges
+Tri INSERTION : 0.019761s | 61136 comparaisons | 61124 décalages
+Tri FUSION : 0.002655s | 3833 comparaisons
+Tri RAPIDE : 0.003412s | 7630 comparaisons | 2422 échanges
 
 === TRI PAR PRIX (1000 éléments) ===
-Tri SÉLECTION : 0.165648s | 498501 comparaisons | 993 échanges
-Tri INSERTION : 0.105827s | 252923 comparaisons | 252915 décalages
-Tri FUSION : 0.004948s | 8696 comparaisons
-Tri RAPIDE : 0.005510s | 12806 comparaisons | 4921 échanges
+Tri SÉLECTION : 0.196807s | 498501 comparaisons | 993 échanges
+Tri INSERTION : 0.073488s | 252919 comparaisons | 252915 décalages
+Tri FUSION : 0.005345s | 8696 comparaisons
+Tri RAPIDE : 0.004660s | 12206 comparaisons | 4838 échanges
 
 === TRI PAR SURFACE (1000 éléments) ===
-Tri SÉLECTION : 0.179883s | 498501 comparaisons | 988 échanges
-Tri INSERTION : 0.092033s | 241164 comparaisons | 241148 décalages
-Tri FUSION : 0.004582s | 8686 comparaisons
-Tri RAPIDE : 0.007193s | 19884 comparaisons | 5866 échanges
+Tri SÉLECTION : 0.199851s | 498501 comparaisons | 988 échanges
+Tri INSERTION : 0.077556s | 241162 comparaisons | 241148 décalages
+Tri FUSION : 0.005084s | 8686 comparaisons
+Tri RAPIDE : 0.008995s | 20798 comparaisons | 4870 échanges
 
 🔍 TESTS DES ALGORITHMES DE RECHERCHE
 ==================================================
 
 --- Tests sur 100 éléments ---
-Recherche linéaire MAISONS PARIS (100) : 0.000013s | 100 cmp | 5 trouvées
-Recherche binaire 350000€ (100) : 0.000016s | 6 cmp | pos 50
-Min/Max PRIX_M2 (100) : 0.000040s | 198 cmp | 1312.0 – 11702.0 €/m²
-Recherche APPART 3P (100) : 0.000028s | 100 cmp | 27 trouvés
+Recherche linéaire MAISONS PARIS (100) : 0.000041s | 100 cmp | 5 trouvées
+Recherche binaire 350000€ (100) : 0.000035s | 6 cmp | pos 50
+Min/Max PRIX_M2 (100) : 0.000070s | 198 cmp | 1312-11702 €/m²
+Recherche APPART 3P (100) : 0.000211s | 100 cmp | 27 trouvés
 
 --- Tests sur 500 éléments ---
-Recherche linéaire MAISONS PARIS (500) : 0.000056s | 500 cmp | 10 trouvées
-Recherche binaire 350000€ (500) : 0.000009s | 5 cmp | pos 295
-Min/Max PRIX_M2 (500) : 0.000211s | 998 cmp | 985.0 – 12777.0 €/m²
-Recherche APPART 3P (500) : 0.000107s | 500 cmp | 60 trouvés
+Recherche linéaire MAISONS PARIS (500) : 0.000067s | 500 cmp | 10 trouvées
+Recherche binaire 350000€ (500) : 0.000011s | 5 cmp | pos 295
+Min/Max PRIX_M2 (500) : 0.000122s | 998 cmp | 985-12777 €/m²
+Recherche APPART 3P (500) : 0.000147s | 500 cmp | 60 trouvés
 
 --- Tests sur 1000 éléments ---
-Recherche linéaire MAISONS PARIS (1000) : 0.000276s | 999 cmp | 17 trouvées
+Recherche linéaire MAISONS PARIS (1000) : 0.000362s | 999 cmp | 17 trouvées
 Recherche binaire 350000€ (1000) : 0.000014s | 7 cmp | pos 600
-Min/Max PRIX_M2 (1000) : 0.000741s | 1996 cmp | 985.0 – 13785.0 €/m²
-Recherche APPART 3P (1000) : 0.000236s | 999 cmp | 91 trouvés
+Min/Max PRIX_M2 (1000) : 0.001730s | 1996 cmp | 985-13785 €/m²
+Recherche APPART 3P (1000) : 0.000903s | 999 cmp | 91 trouvés
 
 === FIN DES RÉSULTATS ===
