@@ -1,0 +1,5 @@
+=== MINI‑TESTS RECHERCHE ===
+Maisons PARIS : 0.000004s | 10 cmp | 2 trouvées
+Appart 3P     : 0.000002s | 10 cmp | 2 trouvés
+Prix 350k€    : 0.000005s | 4 cmp | pos 6
+Min/Max m²    : 0.000003s | 18 cmp | 4000 – 5000
